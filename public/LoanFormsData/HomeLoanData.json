@@ -1,0 +1,168 @@
+[
+  {
+    "step": 1,
+    "title": "Personal Info",
+    "fields": [
+
+         {
+        "name": "PropertyAvailablity",
+        "label": "What type of property do you have?",
+        "type": "select",
+        "options": [
+          "Single Family Home",
+          "Townhome",
+          "Condominium",
+          "Multi Family Home",
+          "Manufactured or Mobile Home"
+        
+        ],
+        "required": true
+      },
+
+{
+        "name": "propertyPurpose",
+        "label": "How do you use this property?",
+        "type": "select",
+        "options": [
+          "Primary Home",
+          "Secondary Home",
+          "Rental Property"
+        
+        ],
+        "required": true
+      },
+
+
+      {
+        "name": "firstName",
+        "label": " What's your First Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+      {
+        "name": "lastName",
+        "label": "What's your last Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+     
+      {
+        "name": "phone",
+        "label": "What is your Phone Number?",
+        "type": "phone",
+        "required": true,
+        "placeholder": ""
+      },
+
+     
+      {
+        "name": "EmploymentStatus",
+        "label": "Select your Employment Status",
+        "type": "select",
+        "options": [
+          "Full Time",
+          "Part Time",
+          "Self-employed",
+          "Unemployed",
+          "Others"
+        ],
+        "required": true
+      },
+
+
+      {
+        "name": "zipCode",
+        "label": "Enter Your Zip Code",
+        "type": "text",
+        "required": true,
+        "placeholder": "_ _ _ _ _ _"
+      },
+
+       {
+        "name": "Email",
+        "label": "What's your email address?",
+        "type": "email",
+        "required": true,
+        "placeholder": "you@gmail.com"
+      },
+
+       {
+        "name": "dob",
+        "label": "When were you born?",
+        "type": "date",
+        "required": true,
+        "placeholder": "DD/MM/YYYY"
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Loan Info",
+    "fields": [
+     
+      {
+        "name": "loanPurpose",
+        "label": "What are you using this loan for?",
+        "type": "select",
+        "options": [
+          "Home Improvement",
+          "Retirement Income",
+          "Debt Consolidation",
+          "Investment Purposes",
+          "Other"
+         
+        ],
+        "required": true
+      },
+      
+       {
+        "name": "loanAmountValuation",
+        "label": " Please estimate the value of the property",
+        "type": "slider",
+        "min": 1000000,
+        "max": 200000000,
+        "step": 500000,
+        "required": true
+      },
+
+       {
+        "name": "loanAmount",
+        "label": " How much would you like to borrow?",
+        "type": "slider",
+        "min": 500000,
+        "max": 1000000,
+        "step": 50000,
+        "required": true
+      },
+
+       {
+        "name": "creditScore",
+        "label": "Estimate your credit score..",
+        "type": "select",
+        "options": [
+          { "label": "Excellent (720+)", "value": "excellent" },
+          { "label": "Good (680-719)", "value": "good" },
+          { "label": "Fair (640-679)", "value": "fair" },
+          { "label": "Poor (639 and below)", "value": "poor" }
+        ],
+        "required": true
+      },
+
+
+       {
+        "name": "previousLoan",
+        "label": "Have you had a bankruptcy or foreclosure in the last 7 years?",
+        "type": "select",
+        "options": [
+          "No",
+          "Foreclosure",
+          "Bankruptcy",
+          "Both"
+        ],
+        "required": true
+      }
+    ]
+  }
+]

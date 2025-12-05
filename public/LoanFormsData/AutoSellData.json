@@ -1,0 +1,151 @@
+[
+  {
+    "brands": [
+      {
+        "name": "Maruti Suzuki",
+        "img": "/CarBrandLogoImages/maruti.png",
+        "models": ["Swift", "Baleno", "Dzire", "WagonR", "Ertiga"]
+      },
+      {
+        "name": "Hyundai",
+        "img": "/CarBrandLogoImages/Hyundi.png",
+        "models": ["i10", "i20", "Creta", "Verna", "Venue"]
+      },
+      {
+        "name": "Tata Motors",
+        "img": "/CarBrandLogoImages/Tata.png",
+        "models": ["Nexon", "Altroz", "Harrier", "Punch", "Safari"]
+      },
+      {
+        "name": "Mahindra",
+        "img": "/CarBrandLogoImages/Mahindra.png",
+        "models": ["XUV700", "Thar", "Scorpio", "Bolero", "XUV300"]
+      },
+      {
+        "name": "Honda",
+        "img": "/CarBrandLogoImages/Hoonda.jpeg",
+        "models": ["City", "Amaze", "Jazz", "WR-V", "Civic"]
+      },
+      {
+        "name": "Toyota",
+        "img": "/CarBrandLogoImages/Toyota.png",
+        "models": ["Innova Crysta", "Fortuner", "Glanza", "Hyryder", "Camry"]
+      },
+      {
+        "name": "Kia",
+        "img": "/CarBrandLogoImages/Kia.png",
+        "models": ["Seltos", "Sonet", "Carens", "EV6", "Carnival"]
+      },
+      {
+        "name": "MG Motors",
+        "img": "/CarBrandLogoImages/MG Motors.png",
+        "models": ["Hector", "Astor", "Gloster", "ZS EV"]
+      },
+      {
+        "name": "Volkswagen",
+        "img": "/CarBrandLogoImages/VW.jpeg",
+        "models": ["Polo", "Virtus", "Taigun", "Tiguan"]
+      },
+      {
+        "name": "Skoda",
+        "img": "/CarBrandLogoImages/Skoda.png",
+        "models": ["Slavia", "Kushaq", "Superb", "Octavia"]
+      },
+      {
+        "name": "Nissan",
+        "img": "/CarBrandLogoImages/Nissan.jpeg",
+        "models": ["Magnite", "Kicks", "Sunny"]
+      },
+      {
+        "name": "Renault",
+        "img": "/CarBrandLogoImages/Renault.jpeg",
+        "models": ["Kwid", "Triber", "Duster", "Kiger"]
+      },
+      {
+        "name": "Ford",
+        "img": "/CarBrandLogoImages/Ford.png",
+        "models": ["Ecosport", "Endeavour", "Figo", "Aspire"]
+      },
+      {
+        "name": "Jeep",
+        "img": "/CarBrandLogoImages/Jeep.png",
+        "models": ["Compass", "Meridian", "Wrangler"]
+      },
+      {
+        "name": "BMW",
+        "img": "/CarBrandLogoImages/BMW.png",
+        "models": ["X1", "X3", "X5", "3 Series", "5 Series"]
+      },
+      {
+        "name": "Mercedes-Benz",
+        "img": "/CarBrandLogoImages/Merc.jpeg",
+        "models": ["A-Class", "C-Class", "E-Class", "GLA", "GLC"]
+      },
+      {
+        "name": "Audi",
+        "img": "/CarBrandLogoImages/Audi.jpeg",
+        "models": ["A3", "A4", "Q3", "Q5", "Q7"]
+      },
+      {
+        "name": "Volvo",
+        "img": "/CarBrandLogoImages/Volvo.jpeg",
+        "models": ["XC40", "XC60", "S60", "XC90"]
+      },
+      {
+        "name": "Lexus",
+        "img": "/CarBrandLogoImages/Lexus.jpeg",
+        "models": ["ES 300h", "NX 350h", "RX 500h"]
+      },
+      {
+        "name": "Jaguar",
+        "img": "/CarBrandLogoImages/Jaguar.jpeg",
+        "models": ["XF", "F-Pace", "XE"]
+      }
+    ],
+
+    "years": [
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+
+    "fuels": ["Diesel", "Petrol", "CNG", "Electric"],
+    
+    "SellPeriod": [
+      "Immediatly",
+      "Within a month",
+      "After a month",
+      "Just Checking Price"
+    ],
+    "locations": [
+      "Delhi",
+      "Mumbai",
+      "Bangalore",
+      "Chennai",
+      "Hyderabad",
+      "Pune",
+      "Kolkata",
+      "Ahmedabad",
+      "Chandigarh",
+      "Jaipur",
+      "Lucknow",
+      "Indore",
+      "Surat",
+      "Bhopal",
+      "Nagpur"
+    ]
+  }
+]

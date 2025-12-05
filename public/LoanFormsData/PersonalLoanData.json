@@ -1,0 +1,131 @@
+[
+  {
+    "step": 1,
+    "title": "Personal Info",
+    "fields": [
+      {
+        "name": "firstName",
+        "label": " What's your First Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+      {
+        "name": "lastName",
+        "label": "What's your last Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+
+
+ {
+        "name": "EmploymentStatus",
+        "label": "Select your Employment Status",
+        "type": "select",
+        "options": [
+          "Full Time",
+          "Part Time",
+          "Self-employed",
+          "Unemployed",
+          "Others"
+         
+        ],
+        "required": true
+      },
+
+
+      {
+        "name": "email",
+        "label": "What's your email address?",
+        "type": "email",
+        "required": true,
+        "placeholder": "hello@gmail.com"
+      },
+      {
+        "name": "phone",
+        "label": "What is your Phone Number?",
+        "type": "phone",
+        "required": true,
+        "placeholder": ""
+      },
+      {
+        "name": "dob",
+        "label": "What's your date of birth?",
+        "type": "date",
+        "required": true,
+        "placeholder": "DD/MM/YYYY"
+      },
+     
+
+      {
+        "name": "homeavaliablity",
+        "label": "Do you rent or own your home?",
+        "type": "select",
+        "options": ["Own", "Rent"],
+        "required": true
+      },
+      {
+        "name": "zipCode",
+        "label": "Enter Your Zip Code",
+        "type": "text",
+        "required": true,
+        "placeholder": "_ _ _ _ _ _"
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Loan Info",
+    "fields": [
+      {
+        "name": "loanAmount",
+        "label": " How much Loan Amount  you need?",
+        "type": "slider",
+        "min": 200000,
+        "max": 1000000,
+        "step": 50000,
+        "required": true
+      },
+      {
+        "name": "loanPurpose",
+        "label": "Select a Loan Purpose..",
+        "type": "select",
+        "options": [
+          "Home",
+          "Personal Loan",
+          "Car Purchasing",
+          "Marriage",
+          "Vacation",
+          "Business"
+        ],
+        "required": true
+      },
+      {
+        "name": "loanUrgency",
+        "label": "How quickly do you need the money?",
+        "type": "select",
+        "options": [
+          "Within 48 Hours",
+          "Within 2 Weeks",
+          "Within a Month",
+          "Unsure about timelines"
+          
+        ],
+        "required": true
+      },
+      {
+        "name": "creditScore",
+        "label": "What's your credit score?",
+        "type": "select",
+        "options": [
+          { "label": "Excellent (720+)", "value": "excellent" },
+          { "label": "Good (680-719)", "value": "good" },
+          { "label": "Fair (640-679)", "value": "fair" },
+          { "label": "Poor (639 and below)", "value": "poor" }
+        ],
+        "required": true
+      }
+    ]
+  }
+]

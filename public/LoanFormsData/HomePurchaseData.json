@@ -1,0 +1,170 @@
+[
+  {
+    "step": 1,
+    "title": "Personal Info",
+    "fields": [
+      {
+        "name": "PropertyPlan",
+        "label": "What type of property you want to buy?",
+        "type": "select",
+        "options": [
+          "Immediately",
+          "Already under constructions",
+          "Within a month",
+          "Just want to know.",
+          "I am shopping & need money"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "propertyType",
+        "label": "What type of property are you purchasing?",
+        "type": "select",
+        "options": [
+          "Single Family Home",
+          "Big Villa",
+          "Townhome",
+          "Manufactured or Mobile Home"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "firstName",
+        "label": " What's your First Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+      {
+        "name": "lastName",
+        "label": "What's your last Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+
+      {
+        "name": "zipCode",
+        "label": "Enter Zip Code of Home ciity",
+        "type": "text",
+        "required": true,
+        "placeholder": "_ _ _ _ _ _"
+      },
+
+      {
+        "name": "homePrice",
+        "label": " What is the estimated purchase price of Home?",
+        "type": "slider",
+        "min": 500000,
+        "max": 1000000,
+        "step": 50000,
+        "required": true
+      },
+
+      {
+        "name": "phone",
+        "label": "What is your Phone Number?",
+        "type": "phone",
+        "required": true,
+        "placeholder": ""
+      },
+
+      {
+        "name": "homeAvailablity",
+        "label": "Is this your first time buying a home?",
+        "type": "select",
+        "options": ["Yes", "No"],
+        "required": true
+      },
+
+      {
+        "name": "EmploymentStatus",
+        "label": "Select your Employment Status",
+        "type": "select",
+        "options": [
+          "Full Time",
+          "Part Time",
+          "Self-employed",
+          "Unemployed",
+          "Others"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "Email",
+        "label": "What's your email address?",
+        "type": "email",
+        "required": true,
+        "placeholder": "you@gmail.com"
+      },
+
+      {
+        "name": "militaryAvailablity",
+        "label": "Have you or your spouse served in the military?",
+        "type": "select",
+        "options": ["Yes", "No"],
+        "required": true
+      },
+
+      {
+        "name": "AnnualIncome",
+        "label": "What is your annual income before taxes?",
+        "type": "text",
+        "required": true
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Loan Info",
+    "fields": [
+      {
+        "name": "loanPurpose",
+        "label": "What are you using this loan for?",
+        "type": "select",
+        "options": [
+          "Home Improvement",
+          "Retirement Income",
+          "Debt Consolidation",
+          "Investment Purposes",
+          "Other"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "loanAmountValuation",
+        "label": " Please estimate the value of the property",
+        "type": "slider",
+        "min": 1000000,
+        "max": 200000000,
+        "step": 500000,
+        "required": true
+      },
+
+      {
+        "name": "creditScore",
+        "label": "Estimate your credit score..",
+        "type": "select",
+        "options": [
+          { "label": "Excellent (720+)", "value": "excellent" },
+          { "label": "Good (680-719)", "value": "good" },
+          { "label": "Fair (640-679)", "value": "fair" },
+          { "label": "Poor (639 and below)", "value": "poor" }
+        ],
+        "required": true
+      },
+
+      {
+        "name": "previousLoan",
+        "label": "Have you had a bankruptcy or foreclosure in the last 7 years?",
+        "type": "select",
+        "options": ["No", "Foreclosure", "Bankruptcy", "Both"],
+        "required": true
+      }
+    ]
+  }
+]

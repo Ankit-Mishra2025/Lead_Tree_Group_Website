@@ -1,0 +1,282 @@
+[
+  {
+    "brands": [
+      {
+        "name": "Maruti Suzuki",
+        "models": ["Swift", "Baleno", "Dzire", "Ertiga", "WagonR","Alto"]
+        
+      },
+      {
+        "name": "Hyundai",
+        "models": ["i10", "i20", "Creta", "Venue", "Verna"]
+      },
+      {
+        "name": "Tata Motors",
+        "models": ["Nexon", "Altroz", "Harrier", "Punch", "Safari"]
+      },
+      {
+        "name": "Mahindra",
+        "models": ["XUV300", "XUV700", "Scorpio", "Bolero", "Thar"]
+      },
+      {
+        "name": "Honda",
+        "models": ["City", "Amaze", "Jazz", "WR-V", "Civic"]
+      },
+      {
+        "name": "Toyota",
+        "models": ["Innova", "Fortuner", "Glanza", "Urban Cruiser", "Etios"]
+      },
+      {
+        "name": "Kia",
+        "models": ["Seltos", "Sonet", "Carens", "EV6", "Carnival"]
+      },
+      {
+        "name": "MG Motors",
+        "models": ["Hector", "Astor", "ZS EV", "Gloster", "Comet"]
+      },
+      {
+        "name": "Volkswagen",
+        "models": ["Polo", "Vento", "Taigun", "Virtus", "Tiguan"]
+      },
+      {
+        "name": "Skoda",
+        "models": ["Slavia", "Kushaq", "Rapid", "Octavia", "Superb"]
+      },
+      {
+        "name": "Renault",
+        "models": ["Kwid", "Kiger", "Triber", "Duster", "Captur"]
+      },
+      {
+        "name": "Nissan",
+        "models": ["Magnite", "Kicks", "Sunny", "Micra", "Terra"]
+      },
+      {
+        "name": "Ford",
+        "models": ["EcoSport", "Endeavour", "Figo", "Aspire", "Mustang"]
+      },
+      {
+        "name": "BMW",
+        "models": ["X1", "X3", "X5", "3 Series", "5 Series"]
+      },
+      {
+        "name": "Mercedes",
+        "models": ["A-Class", "C-Class", "E-Class", "GLA", "GLC"]
+      }
+    ],
+
+    "cars": [
+      {
+        "id": 1,
+        "brand": "Maruti Suzuki",
+        "model": "Swift",
+        "year": 2024,
+        "price": "6.1 Lakh",
+        "fuel": "Petrol",
+        "km": "20.5km",
+        "image":"/LoanFormsData/CarBuyImages/Swift.jpg"
+      },
+
+
+ {
+        "id": 1,
+        "brand": "Maruti Suzuki",
+        "model": "Baleno",
+        "year": 2023,
+        "price": "9.1 Lakh",
+        "fuel": "Diesel",
+        "km": "30.5km",
+         "image":"/LoanFormsData/CarBuyImages/Baleno.png"
+      },
+
+{
+        "id": 1,
+        "brand": "Maruti Suzuki",
+        "model": "Dzire",
+        "year": 2022,
+        "price": "9.1 Lakh",
+        "fuel": "Petrol",
+        "km": "40.5km",
+         "image":"/LoanFormsData/CarBuyImages/Dzire.png"
+      },
+
+
+      {
+        "id": 1,
+        "brand": "Maruti Suzuki",
+        "model": "WagonR",
+        "year": 2021,
+        "price": "9.1 Lakh",
+        "fuel": "Diesel",
+        "km": "25.4km",
+         "image":"/LoanFormsData/CarBuyImages/Wagnor.avif"
+      },
+
+ {
+        "id": 1,
+        "brand": "Maruti Suzuki",
+        "model": "Ertiga",
+        "year": 2020,
+        "price": "8.5 Lakh",
+        "fuel": "Petrol",
+        "km": "30.6km",
+         "image":"/LoanFormsData/CarBuyImages/Ertiga.jpg"
+      },
+
+
+ {
+        "id": 1,
+        "brand": "Maruti Suzuki",
+        "model": "Alto",
+        "year": 2020,
+        "price": "5.5 Lakh",
+        "fuel": "Petrol",
+        "km": "42.2km",
+         "image":"/LoanFormsData/CarBuyImages/Alto.jpg"
+      },
+
+
+      {
+        "id": 2,
+        "brand": "Hyundai",
+        "model": "Creta",
+        "year": 2024,
+        "price": "12.5 Lakh",
+        "fuel": "Diesel",
+        "km": "18.0km",
+         "image":"/LoanFormsData/CarBuyImages/creta.avif"
+      },
+
+
+{
+        "id": 2,
+        "brand": "Hyundai",
+        "model": "i10",
+        "year": 2023,
+        "price": "12.5 Lakh",
+        "fuel": "Diesel",
+        "km": "40.0km",
+         "image":"/LoanFormsData/CarBuyImages/i10.avif"
+      },
+
+      {
+        "id": 2,
+        "brand": "Hyundai",
+        "model": "i20",
+        "year": 2022,
+        "price": "9.5 Lakh",
+        "fuel": "Petrol",
+        "km": "20.0km",
+         "image":"/LoanFormsData/CarBuyImages/i20.jpg"
+      },
+
+      {
+        "id": 2,
+        "brand": "Hyundai",
+        "model": "Verna",
+        "year": 2021,
+        "price": "10.0 Lakh",
+        "fuel": "Petrol",
+        "km": "20.0km",
+         "image":"/LoanFormsData/CarBuyImages/verna.avif"
+      },
+
+{
+        "id": 2,
+        "brand": "Hyundai",
+        "model": "i30",
+        "year": 2020,
+        "price": "8.0 Lakh",
+        "fuel": "Diesel",
+        "km": "30.0km",
+         "image":"/LoanFormsData/CarBuyImages/i30.jpg"
+      },
+
+
+      
+      {
+        "id": 3,
+        "brand": "Tata Motors",
+        "model": "Nexon",
+        "year": 2022,
+        "price": "9.2 Lakh",
+        "fuel": "Petrol",
+        "km": "25.0km",
+         "image":"/LoanFormsData/CarBuyImages/Nexon.jpg"
+      },
+
+
+
+      
+      {
+        "id": 4,
+        "brand": "Mahindra",
+        "model": "Thar",
+        "year": 2021,
+        "price": "13.8 Lakh",
+        "fuel": "Diesel",
+        "km": "35.3km",
+         "image":"/LoanFormsData/CarBuyImages/Thar.jpg"
+      },
+      {
+        "id": 5,
+        "brand": "Honda",
+        "model": "City",
+        "year": 2020,
+        "price": "8.9 Lakh",
+        "fuel": "Petrol",
+        "km": "45.6km",
+         "image":"/LoanFormsData/CarBuyImages/city.jpg"
+      },
+      {
+        "id": 6,
+        "brand": "Toyota",
+        "model": "Innova",
+        "year": 2019,
+        "price": "14.5 Lakh",
+        "fuel": "Diesel",
+        "km": "65.7km",
+         "image":"/LoanFormsData/CarBuyImages/Innova.webp"
+      },
+      {
+        "id": 7,
+        "brand": "Kia",
+        "model": "Seltos",
+        "year": 2018,
+        "price": "10.5 Lakh",
+        "fuel": "Petrol",
+        "km": "58.3km",
+         "image":"/LoanFormsData/CarBuyImages/Seltos.png"
+      },
+      {
+        "id": 8,
+        "brand": "MG Motors",
+        "model": "Hector",
+        "year": 2017,
+        "price": "12.8 Lakh",
+        "fuel": "Diesel",
+        "km": "70.5km",
+         "image":"/LoanFormsData/CarBuyImages/Hector.jpeg"
+      },
+      {
+        "id": 9,
+        "brand": "Volkswagen",
+        "model": "Polo",
+        "year": 2016,
+        "price": "5.2 Lakh",
+        "fuel": "Petrol",
+        "km": "78.4km",
+         "image":"/LoanFormsData/CarBuyImages/Polo.png"
+      },
+      {
+        "id": 10,
+        "brand": "Skoda",
+        "model": "Kushaq",
+        "year": 2015,
+        "price": "9.4 Lakh",
+        "fuel": "Petrol",
+        "km": "85.3km",
+         "image":"/LoanFormsData/CarBuyImages/kushaq.jpg"
+      }
+    ]
+  }
+]

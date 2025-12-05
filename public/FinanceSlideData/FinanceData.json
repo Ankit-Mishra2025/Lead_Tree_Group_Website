@@ -1,0 +1,59 @@
+[{
+   "id":"1",
+   "title":"Pirmal Finance",
+   "image":"/FinanceSlideData/Piramal.png"
+},
+
+
+{
+    "id":"2",
+    "title":"Kotak Mahindra",
+   "image":"/FinanceSlideData/Kotak.png"
+},
+
+{
+    "id":"3",
+    "title":"ICICI",
+   "image":"/FinanceSlideData/ICICI.png"
+},
+
+{
+    "id":"4",
+   "title":"Bank of America",
+    "image":"/FinanceSlideData/BankAmerica.png"
+},
+
+{
+    "id":"5",
+    "title":"Bank of Newyork",
+   "image":"/FinanceSlideData/BNY.jpg"
+},
+
+
+{
+    "id":"6",
+   "title":"American Express",
+   "image":"/FinanceSlideData/American.png"
+},
+
+{
+   " id":"7",
+   "title":"Bank of Baroda",
+    "image":"/FinanceSlideData/Baroda.png"
+},
+
+
+{
+    "id":"8",
+   "title":"HDFC",
+   "image":"/FinanceSlideData/HDFC.png"
+},
+
+
+{
+   "id":"9",
+   "title":"Union Bank",
+   "image":"/FinanceSlideData/UnionBank.jpg"
+}
+
+]

@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    /* 🌍 Module and Target */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+
+    /* 🧩 Interop and Compatibility */
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+
+    /* 📦 Type Checking Options */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* 📁 Project Structure */
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+
+    /* 🗺️ Output and Declarations */
+    "sourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+
+    /* ✅ Misc */
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src", "public/FinanceSlideData"],
+  "exclude": ["node_modules", "dist"]
+}

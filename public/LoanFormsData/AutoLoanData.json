@@ -1,0 +1,197 @@
+[
+  {
+    "step": 1,
+    "title": "Personal Info",
+    "fields": [
+      {
+        "name": "autoLoanType",
+        "label": "What type of auto loan are you interested in?",
+        "type": "select",
+        "options": ["Purchase", "Refinance", "Lease Buy Out"],
+        "required": true
+      },
+
+      {
+        "name": "loanPaidTime",
+        "label": "How quickly do you want to pay off your loan?",
+        "type": "select",
+        "options": [
+          "1 Year(12 Months)",
+          "2 Years(24 Months)",
+          "3 Year(36 Months)",
+          "4 Years (48 Months)",
+          "5 Years(60 Months)",
+          "6 Years (72 Months)",
+          "7 Years (84 Months)"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "firstName",
+        "label": " What's your First Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+      {
+        "name": "lastName",
+        "label": "What's your last Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": ""
+      },
+
+      {
+        "name": "loanamountTime",
+        "label": "How quickly do you need the money?",
+        "type": "select",
+        "options": [
+          "Within 48 hours",
+          "Within 2 weeks",
+          "Within a month",
+          "Unsure, just browsing rates"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "AutoModalAndYear",
+        "label": "What’s the year and model?",
+        "type": "select",
+        "options": [
+          "1990",
+          "1991",
+          "1992",
+          "1993",
+          "1994",
+          "1995",
+          "1996",
+          "1997",
+          "1998",
+          "1999",
+          "2000",
+          "2001",
+          "2002",
+          "2003",
+          "2004",
+          "2005 ",
+          "2006",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "phone",
+        "label": "What is your Phone Number?",
+        "type": "phone",
+        "required": true,
+        "placeholder": ""
+      },
+
+      {
+        "name": "AutoMilage",
+        "label": " How much mileage is on your vehicle?",
+        "type": "text",
+        "required": true
+      },
+
+      {
+        "name": "previousLoan",
+        "label": "Have you had a bankruptcy or foreclosure in the last 7 years?",
+        "type": "select",
+        "options": ["No", "Foreclosure", "Bankruptcy", "Both"],
+        "required": true
+      },
+
+      {
+        "name": "Email",
+        "label": "What's your email address?",
+        "type": "email",
+        "required": true,
+        "placeholder": "you@gmail.com"
+      },
+
+      {
+        "name": "dob",
+        "label": "What is Your Date of Birth",
+        "type": "date",
+        "required": true
+      },
+
+      {
+        "name": "EmploymentStatus",
+        "label": "Select your Employment Status",
+        "type": "select",
+        "options": [
+          "Full Time",
+          "Part Time",
+          "Self-employed",
+          "Unemployed",
+          "Retired",
+          "Homemaker",
+          "Student",
+          "Others"
+        ],
+        "required": true
+      },
+
+      {
+        "name": "AnnualIncome",
+        "label": "What is your annual income before taxes?",
+        "type": "text",
+        "required": true
+      },
+
+      {
+        "name": "creditScore",
+        "label": "Estimate your credit score..",
+        "type": "select",
+        "options": [
+          { "label": "Excellent (720+)", "value": "excellent" },
+          { "label": "Good (680-719)", "value": "good" },
+          { "label": "Fair (640-679)", "value": "fair" },
+          { "label": "Poor (639 and below)", "value": "poor" }
+        ],
+        "required": true
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Loan Info",
+    "fields": [
+      {
+        "name": "loanAmountValuation",
+
+        "label": " Please estimate the value of the property",
+
+        "type": "slider",
+        "min": 1000000,
+        "max": 200000000,
+        "step": 500000,
+        "required": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "step": 1,
+    "title": "Personal Info",
+    "fields": [
+
+ {
+        "name": "debtAmount",
+        "label": " How much debt do you owe?",
+        "type": "slider",
+        "min": 200000,
+        "max": 1000000,
+        "step": 50000,
+        "required": true
+      },
+
+
+
+      {
+        "name": "fullName",
+        "label": " What's your Full Name?",
+        "type": "text",
+        "required": true,
+        "placeholder": "Full Name"
+      },
+      
+{
+        "name": "EmploymentStatus",
+        "label": "Select your Employment Status",
+        "placeholder":"Select  any one Option",
+        "type": "select",
+        "options": [
+          "Full Time",
+          "Part Time",
+          "Self-employed",
+          "Unemployed",
+          "Others"
+        ],
+        "required": true
+      },
+
+      
+
+      {
+        "name": "anualIncome",
+        "label": " What's your annual income before taxes?",
+        "type": "text",
+        "required": true,
+        "placeholder": "Enter Your Annual Income Before Taxes"
+      },
+
+      {
+        "name": "email",
+        "label": "What's your email address?",
+        "type": "email",
+        "required": true,
+        "placeholder": "hello@gmail.com"
+      },
+      {
+        "name": "phone",
+        "label": "What is your Phone Number?",
+        "type": "phone",
+        "required": true,
+        "placeholder": ""
+      },
+
+
+           {
+        "name": "zipCode",
+        "label": "Enter Your Zip Code",
+        "type": "text",
+        "required": true,
+        "placeholder": "_ _ _ _ _ _"
+      },
+
+
+
+      
+       {
+        "name": "dob",
+        "label": "What's your date of birth?",
+        "type": "date",
+        "required": true,
+        "placeholder": "DD/MM/YYYY"
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Loan Info",
+    "fields": [
+    
+   
+      {
+        "name": "loanUrgency",
+        "label": "How quickly do you need the money?",
+        "type": "select",
+        "placeholder":"Select one Option",
+        "options": [
+          "Within 48 Hours",
+          "Within 2 Weeks",
+          "Within a Month",
+          "Unsure about timelines"
+          
+        ],
+        "required": true
+      },
+      {
+        "name": "creditScore",
+        "label": "What's your credit score?",
+        "placeholder":"Select one Option",
+        "type": "select",
+        "options": [
+          { "label": "Excellent (720+)", "value": "excellent" },
+          { "label": "Good (680-719)", "value": "good" },
+          { "label": "Fair (640-679)", "value": "fair" },
+          { "label": "Poor (639 and below)", "value": "poor" }
+        ],
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "What's your email address?",
+        "type": "email",
+        "required": true,
+        "placeholder": "hello@gmail.com"
+      }
+    ]
+  }
+]
