@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Search } from "lucide-react";
+import { ArrowLeft, Loader2, Search } from "lucide-react";
 import { ElectricBolt } from "@mui/icons-material";
 import BackgroundImage from "/src/assets/Background.webp";
 import toast, { Toaster } from "react-hot-toast";
@@ -11,20 +11,36 @@ const BikeValuationLoan = () => {
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
   const [InputResult, setInputResult] = useState("");
+  const [submitLoader, setSubmitLoader] = useState(false);
+const[Mobile,setMobile]=useState("")
 
   // Selected Data
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedModel, setSelectedModel] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedFuel, setSelectedFuel] = useState("");
-  const [selectedSellTime, setSelectedSellTime] = useState("");
-  const [mobile, setMobile] = useState("");
+  // const [selectedBrand, setSelectedBrand] = useState("");
+  // const [selectedModel, setSelectedModel] = useState("");
+  // const [selectedYear, setSelectedYear] = useState("");
+  // const [selectedLocation, setSelectedLocation] = useState("");
+  // const [selectedFuel, setSelectedFuel] = useState("");
+  // const [selectedSellTime, setSelectedSellTime] = useState("");
+  // const [mobile, setMobile] = useState("");
 
-  // ✅ Search Inputs (new)
-  const [modelSearch, setModelSearch] = useState("");
-  const [locationSearch, setLocationSearch] = useState("");
-  const [brandSearch, setBrandSearch] = useState("");
+  const [selected, setSelected] = useState({
+    brand: "",
+    model: "",
+    year: "",
+    fuel: "",
+    location: "",
+    sellTime: "",
+   Mobile:""
+  });
+
+  // ✅ Unified search inputs
+  const [search, setSearch] = useState({
+    brand: "",
+    model: "",
+    location: "",
+  });
+
+ 
 
   const navigate = useNavigate();
 
@@ -63,88 +79,173 @@ const BikeValuationLoan = () => {
     }),
   };
 
+  const updateAndNext = (key, value, isFinal = false) => {
+    setSelected((prev) => {
+      const updated = { ...prev, [key]: value };
+      savePartialData(updated); // <-- अब updated data save होगा
+      return updated;
+    });
+
+    setDirection(1);
+
+    if (isFinal) {
+      resetAllFields(); // Reset all states
+      setStep(1); // Back to first step
+      return; // Stop here
+    }
+
+    setStep((prev) => prev + 1);
+  };
+
+  const resetAllFields = () => {
+    setSelected({
+      brand: "",
+      model: "",
+      year: "",
+      fuel: "",
+      location: "",
+      sellTime: "",
+      Mobile: "",
+    });
+setMobile("");
+    setSearch({ brand: "", model: "", location: "" });
+  };
+
+  const savePartialData = async (data) => {
+    console.log("Saving partial:", data); // ⭐ console pe full data
+
+    const payload = {
+      secret_token: "cc-ASJFSNFRGF",
+      data_list: [
+        {
+          source_name: "api_partial_save",
+          json_data: {
+            loan_type: "personal_loan",
+            ...data,
+          },
+        },
+      ],
+    };
+
+    try {
+      const response = await fetch(
+        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+      console.log("Partial Save Response:", result);
+      console.log("Payload Sent:", payload);
+    } catch (e) {
+      console.log("Partial save failed", e);
+    }
+  };
+
   const handleNext = () => {
+    savePartialData(selected);
     setDirection(1);
     setStep((prev) => prev + 1);
   };
 
-  const handleBack = () => {
-    if (step > 1) {
-      setDirection(-1);
-      setStep((prev) => prev - 1);
-    }
-  };
+  const handleBack = useCallback(() => {
+    setDirection(-1);
+    setStep((prev) => (prev > 1 ? prev - 1 : prev));
+  }, []);
 
-  const handleInputSubmit = (e) => {
-    e.preventDefault();
-    toast.success("Your Query is loaded");
-    navigate("/Bike-Valuation");
-  };
+  // const handleInputSubmit = (e) => {
+  //   e.preventDefault();
+  //   toast.success("Your Query is loaded");
+  //   navigate("/Bike-Valuation");
+  // };
 
- const onSubmit = async (e) => {
-  e.preventDefault();
-
-  const payloadData = {
-    brand: selectedBrand,
-    model: selectedModel,
-    year: selectedYear,
-    fuel: selectedFuel,
-    location: selectedLocation,
-    sellTime: selectedSellTime,
-    mobile: mobile,
-  };
-
-  console.log("Sending: ", payloadData);
-
-  const payload = {
-    secret_token: "cc-ASJFSNFRGF",
-    data_list: [
-      {
-        source_name: "api_post_method",
-        json_data: payloadData,
-        bucket_is: "ach.zippycash.online",
-        active: true,
-        status: "on_submit",
-        remark: "-",
-      },
-    ],
-  };
-
-  const res = await fetch(
-    "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken":
-          "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
-      },
-      body: JSON.stringify(payload),
-    }
+  const handleInputSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      console.log("Input Registration is", InputResult);
+      toast.success("Your Query is loaded");
+      navigate("/Bike-Valuation");
+    },
+    [InputResult, navigate]
   );
 
-  toast.success("Successfully Submitted!");
-};
+  const onSubmit = async (e) => {
+    try {
+       updateAndNext("Mobile", Mobile, true);
+         setSubmitLoader(true);
+      e.preventDefault();
 
+      const payloadData = {
+        brand: selected.brand,
+        model: selected.model,
+        year: selected.year,
+        fuel: selected.fuel,
+        location: selected.location,
+        sellTime: selected.sellTime,
+        mobile: selected.Mobile,
+      };
+
+      console.log("Sending: ", payloadData);
+
+      const payload = {
+        secret_token: "cc-ASJFSNFRGF",
+        data_list: [
+          {
+            source_name: "api_post_method",
+            json_data: payloadData,
+            bucket_is: "ach.zippycash.online",
+            active: true,
+            status: "on_submit",
+            remark: "-",
+          },
+        ],
+      };
+
+      const res = await fetch(
+        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      toast.success("Successfully Submitted!");
+    } catch (error) {
+      console.log("Error ", error);
+    } finally {
+      setSubmitLoader(false);
+    }
+  };
 
   // ✅ Filtered Data for Models & Locations & Brand
 
   const filterdBrand =
     sellBikeData?.brands?.filter((brand) =>
-      brand.name.toLowerCase().includes(brandSearch.toLowerCase())
+      brand.name.toLowerCase().includes(search.brand.toLowerCase())
     ) || [];
 
   const filteredModels =
     sellBikeData?.brands
-      ?.find((b) => b.name === selectedBrand)
+      ?.find((b) => b.name === selected.brand)
       ?.models?.filter((model) =>
-        model.toLowerCase().includes(modelSearch.toLowerCase())
+        model.toLowerCase().includes(search.model.toLowerCase())
       ) || [];
 
-  const filteredLocations =
-    sellBikeData?.locations?.filter((loc) =>
-      loc.toLowerCase().includes(locationSearch.toLowerCase())
-    ) || [];
+  const filteredLocations = sellBikeData?.locations?.filter((loc) =>
+    loc.toLowerCase().includes(search.location.toLowerCase())
+  ) || [sellBikeData, search.location];
 
   return (
     <div className="relative w-full flex justify-center items-center">
@@ -263,7 +364,7 @@ const BikeValuationLoan = () => {
                   <input
                     type="text"
                     placeholder="Search your brand..."
-                    value={brandSearch}
+                    value={search.brand}
                     onChange={(e) => setBrandSearch(e.target.value)}
                     className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-md text-sm sm:text-[15px] focus:outline-none focus:ring-1 focus:ring-green-300"
                   />
@@ -278,12 +379,9 @@ const BikeValuationLoan = () => {
                     filterdBrand.map((brand, i) => (
                       <div
                         key={i}
-                        onClick={() => {
-                          setSelectedBrand(brand.name);
-                          handleNext();
-                        }}
+                        onClick={() => updateAndNext("brand", brand.name)}
                         className={`flex flex-col items-center justify-center bg-gray-100 rounded-md shadow-sm cursor-pointer transition-all duration-200 ${
-                          selectedBrand === brand.name
+                          selected.brand === brand.name
                             ? "border-green-500 shadow-md"
                             : "border-gray-300"
                         } px-3 py-3 sm:px-3 sm:py-2 md:px-3 md:py-3 lg:px-3 lg:py-4`}
@@ -321,7 +419,7 @@ const BikeValuationLoan = () => {
                 className="w-full mt-3"
               >
                 <h2 className="text-[16px] sm:text-[17px] font-semibold mb-4 text-gray-800">
-                  Select the model of your Bike ({selectedBrand})
+                  Select the model of your Bike ({selected.brand})
                 </h2>
 
                 {/* 🔍 Search Bar */}
@@ -330,7 +428,7 @@ const BikeValuationLoan = () => {
                   <input
                     type="text"
                     placeholder="Search your Bike model..."
-                    value={modelSearch}
+                    value={search.model}
                     onChange={(e) => setModelSearch(e.target.value)}
                     className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-md text-sm sm:text-[15px] focus:outline-none focus:ring-1 focus:ring-green-300"
                   />
@@ -345,12 +443,9 @@ const BikeValuationLoan = () => {
                     filteredModels.map((model, i) => (
                       <div
                         key={i}
-                        onClick={() => {
-                          setSelectedModel(model);
-                          handleNext();
-                        }}
+                        onClick={() => updateAndNext("model", model)}
                         className={`flex items-center justify-center px-3 py-6 sm:px-5 sm:py-10 bg-gray-100 shadow-xs border border-gray-300  ${
-                          selectedModel === model
+                          selected.model === model
                             ? "border-green-500 shadow-md"
                             : "border-gray-300"
                         } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}
@@ -387,12 +482,9 @@ const BikeValuationLoan = () => {
                   {sellBikeData?.years?.map((year, i) => (
                     <div
                       key={i}
-                      onClick={() => {
-                        setSelectedYear(year);
-                        handleNext();
-                      }}
+                      onClick={() => updateAndNext("year", year)}
                       className={`flex items-center justify-center px-10 py-6 sm:px-10 sm:py-5 bg-gray-100 border border-gray-200 shadow-md  ${
-                        selectedYear === year
+                        selected.year === year
                           ? "border-green-500 shadow-md"
                           : "border-gray-300"
                       } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}
@@ -425,12 +517,9 @@ const BikeValuationLoan = () => {
                   {sellBikeData?.fuels?.map((fuels, i) => (
                     <div
                       key={i}
-                      onClick={() => {
-                        setSelectedFuel(fuels);
-                        handleNext();
-                      }}
+                      onClick={() => updateAndNext("fuels", fuels)}
                       className={`flex items-center justify-center px-3 py-6 sm:px-5 sm:py-10 bg-gray-100 border border-gray-300 shadow-md ${
-                        selectedFuel === fuels
+                        selected.fuel === fuels
                           ? "border-green-500 shadow-md"
                           : "border-gray-300"
                       } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}
@@ -465,7 +554,7 @@ const BikeValuationLoan = () => {
                   <input
                     type="text"
                     placeholder="Search your city..."
-                    value={locationSearch}
+                    value={search.location}
                     onChange={(e) => setLocationSearch(e.target.value)}
                     className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-md text-sm sm:text-[15px] focus:outline-none focus:ring-1 focus:ring-green-300"
                   />
@@ -480,12 +569,9 @@ const BikeValuationLoan = () => {
                     filteredLocations.map((location, i) => (
                       <div
                         key={i}
-                        onClick={() => {
-                          setSelectedLocation(location);
-                          handleNext();
-                        }}
+                        onClick={() => updateAndNext("location", location)}
                         className={`flex items-center justify-center px-3 py-3 sm:px-5 sm:py-5 bg-gray-100  border border-gray-300 shadow-md  ${
-                          selectedLocation === location
+                          selected.location === location
                             ? "border-green-500 shadow-md"
                             : "border-gray-300"
                         } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}
@@ -522,12 +608,9 @@ const BikeValuationLoan = () => {
                   {sellBikeData?.SellPeriod?.map((sellperiod, i) => (
                     <div
                       key={i}
-                      onClick={() => {
-                        setSelectedSellTime(sellperiod);
-                        handleNext();
-                      }}
+                      onClick={() => updateAndNext("sellperiod", sellperiod)}
                       className={`flex items-center justify-center w-full py-4 sm:py-5 bg-gray-100 border ${
-                        selectedSellTime === sellperiod
+                        selected.sellTime === sellperiod
                           ? "border-green-500 shadow-md"
                           : "border-gray-300"
                       } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}
@@ -563,7 +646,7 @@ const BikeValuationLoan = () => {
                       required
                       maxLength={10}
                       minLength={10}
-                      value={mobile}
+                      value={Mobile}
                       onChange={(e) => setMobile(e.target.value)}
                       placeholder="Mobile number"
                       className="px-3 py-3 focus:outline-none focus:border border-gray-300 rounded-lg focus:ring-1 ring-green-500 w-full border placeholder:text-[14px] "
@@ -571,9 +654,17 @@ const BikeValuationLoan = () => {
 
                     <button
                       type="submit"
+                      disabled={submitLoader}
                       className="bg-green-500 hover:bg-green-600 text-white font-semibold  py-3 rounded-lg transition-all duration-300 w-70 text-[18px] cursor-pointer"
                     >
-                      Get Otp
+                      {submitLoader ? (
+                        <div className="flex items-center justify-center gap-2">
+                          <Loader2 className="animate-spin h-5 w-5" />{" "}
+                          Validating.
+                        </div>
+                      ) : (
+                        "Get Otp"
+                      )}
                     </button>
                   </div>
                 </div>

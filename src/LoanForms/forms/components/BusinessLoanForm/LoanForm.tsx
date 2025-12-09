@@ -96,6 +96,44 @@ const[submitLoader,setSubmitLoader]=useState<boolean>(false)
     };
   }, []);
 
+const savePartialData = async (data:any) => {
+  console.log("Saving partial:", data);  // ⭐ console pe full data
+  
+  const payload = {
+    secret_token: "cc-ASJFSNFRGF",
+    data_list: [
+      {
+        source_name: "api_partial_save",
+        json_data: {
+          loan_type: "personal_loan",
+          ...data
+        }
+      }
+    ]
+  };
+
+  try {
+    const response = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
+      method: "POST",
+      headers: {"Content-Type": "application/json",
+        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"},
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+    console.log("Partial Save Response:", result);
+    console.log("Payload Sent:", payload);
+
+  } catch (e) {
+    console.log("Partial save failed", e);
+  }
+};
+
+
+
+
+
+
 const onSubmit = async (data:any) => {
   try {
     setSubmitLoader(true)
@@ -154,7 +192,7 @@ const onSubmit = async (data:any) => {
       // Show inline error messages only, no toaster
       return;
     }
-
+savePartialData(allValues)
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 

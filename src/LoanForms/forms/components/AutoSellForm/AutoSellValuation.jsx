@@ -12,7 +12,7 @@ const AutoSellValuation = () => {
   const [direction, setDirection] = useState(1);
   const [InputResult, setInputResult] = useState("");
   const [Mobile, setMobile] = useState("");
-  const [submitLoader, setSubmitLoader] = useState(false)
+  const [submitLoader, setSubmitLoader] = useState(false);
 
   // ✅ Unified selected data (less state)
   const [selected, setSelected] = useState({
@@ -72,8 +72,87 @@ const AutoSellValuation = () => {
     []
   );
 
+
+
+const updateAndNext = (key, value, isFinal = false) => {
+
+  setSelected((prev) => {
+    const updated = { ...prev, [key]: value };
+    savePartialData(updated);
+    return updated;
+  });
+
+  setDirection(1);
+
+  if (isFinal) {
+    resetAllFields();       // Reset all states
+    setStep(1);             // Back to first step
+    return;                 // Stop here
+  }
+
+  setStep(prev => prev + 1);
+};
+
+
+const resetAllFields = () => {
+  setSelected({
+    brand: "",
+    model: "",
+    year: "",
+    fuel: "",
+    location: "",
+    sellTime: "",
+    Mobile: "",
+  });
+
+  setMobile("");
+  setSearch({ brand: "", model: "", location: "" });
+};
+
+
+
+
+  const savePartialData = async (data) => {
+    console.log("Saving partial:", data); // ⭐ console pe full data
+
+    const payload = {
+      secret_token: "cc-ASJFSNFRGF",
+      data_list: [
+        {
+          source_name: "api_partial_save",
+          json_data: {
+            loan_type: "personal_loan",
+            ...data,
+          },
+        },
+      ],
+    };
+
+    try {
+      const response = await fetch(
+        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+      console.log("Partial Save Response:", result);
+      console.log("Payload Sent:", payload);
+    } catch (e) {
+      console.log("Partial save failed", e);
+    }
+  };
+
   // ✅ Handlers (memoized)
   const handleNext = useCallback(() => {
+    savePartialData(selected);
     setDirection(1);
     setStep((prev) => prev + 1);
   }, []);
@@ -94,7 +173,9 @@ const AutoSellValuation = () => {
   );
 
   const onSubmit = async (e) => {
+  
     try {
+       updateAndNext("Mobile", Mobile, true);
       setSubmitLoader(true);
       e.preventDefault();
 
@@ -304,10 +385,8 @@ const AutoSellValuation = () => {
                     filteredBrands.map((brand, i) => (
                       <div
                         key={i}
-                        onClick={() => {
-                          handleSelect("brand", brand.name);
-                          handleNext();
-                        }}
+                         onClick={() => updateAndNext("brand", brand.name)}
+
                         className={`flex flex-col items-center justify-center bg-slate-50 shadow-sm rounded-md cursor-pointer transition-all  ${
                           selected.brand === brand.name
                             ? "border-green-500 shadow-md"
@@ -368,10 +447,8 @@ const AutoSellValuation = () => {
                     filteredModels.map((model, i) => (
                       <div
                         key={i}
-                        onClick={() => {
-                          handleSelect("model", model);
-                          handleNext();
-                        }}
+                       onClick={() => updateAndNext("model", model)}
+
                         className={`flex items-center justify-center px-3 py-6 bg-slate-100  rounded-lg hover:border-green-400 cursor-pointer border border-gray-300 shadow-xs ${
                           selected.model === model
                             ? "border-green-500 shadow-md"
@@ -410,11 +487,8 @@ const AutoSellValuation = () => {
                   {sellCarData?.years?.map((year, i) => (
                     <div
                       key={i}
-                      onClick={() => {
-                        handleSelect("Year is", year);
+                     onClick={() => updateAndNext("year", year)}
 
-                        handleNext();
-                      }}
                       className={`flex items-center justify-center px-10 py-6 sm:px-10 sm:py-5 bg-gray-100 border border-gray-300 shadow-xs ${
                         selected.year === year
                           ? "border-green-500 shadow-md"
@@ -449,10 +523,8 @@ const AutoSellValuation = () => {
                   {sellCarData?.fuels?.map((fuels, i) => (
                     <div
                       key={i}
-                      onClick={() => {
-                        handleSelect("Fuel Type is", fuels);
-                        handleNext();
-                      }}
+                      onClick={() => updateAndNext("fuel", fuels)}
+
                       className={`flex items-center justify-center px-3 py-6 sm:px-5 sm:py-10 bg-gray-100 border border-gray-300 shadow-xs ${
                         selected.fuel === fuels
                           ? "border-green-500 shadow-md"
@@ -506,10 +578,7 @@ const AutoSellValuation = () => {
                     filteredLocations.map((location, i) => (
                       <div
                         key={i}
-                        onClick={() => {
-                          handleSelect("Location is", location);
-                          handleNext();
-                        }}
+               onClick={()=>updateAndNext("location",location)}
                         className={`flex items-center justify-center px-3 py-3 sm:px-5 sm:py-5 bg-gray-100 border border-gray-300 shadow-xs  ${
                           selected.location === location
                             ? "border-green-500 shadow-md"
@@ -548,10 +617,8 @@ const AutoSellValuation = () => {
                   {sellCarData?.SellPeriod?.map((sellperiod, i) => (
                     <div
                       key={i}
-                      onClick={() => {
-                        handleSelect(sellperiod);
-                        if (step < 7) handleNext();
-                      }}
+                      onClick={() => updateAndNext("sellTime", sellperiod)}
+
                       className={`flex items-center justify-center w-full py-4 sm:py-5 bg-gray-100 border ${
                         selected.sellTime === sellperiod
                           ? "border-green-500 shadow-md"
@@ -597,11 +664,15 @@ const AutoSellValuation = () => {
                     <button
                       type="submit"
                       disabled={submitLoader}
+                    
+                      
+                      
                       className="bg-green-500 hover:bg-green-600 text-white font-semibold  py-3 rounded-lg transition-all duration-300 w-70 text-[18px] cursor-pointer"
                     >
                       {submitLoader ? (
                         <div className="flex items-center justify-center gap-2">
-                          <Loader2 className="animate-spin h-5 w-5" /> Validating.
+                          <Loader2 className="animate-spin h-5 w-5" />{" "}
+                          Validating.
                         </div>
                       ) : (
                         "Get Otp"

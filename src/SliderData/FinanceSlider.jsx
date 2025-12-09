@@ -11,7 +11,7 @@ const FinanceSlider = () => {
     try {
       const data = await fetch("/FinanceSlideData/FinanceData.json");
       const response = await data.json();
-      console.log(response);
+     
 
       setFinanceImageData(response);
     } catch (error) {
