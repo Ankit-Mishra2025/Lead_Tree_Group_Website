@@ -246,7 +246,7 @@ savePartialData(allValues);
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6">
-            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-[220px]  md:w-full">
+           <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
               {field.label}
             </label>
 

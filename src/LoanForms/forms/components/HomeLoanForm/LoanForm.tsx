@@ -284,7 +284,7 @@ savePartialData(allValues);
                   {...rhfField}
                   placeholder="Enter 10-digit phone number"
                   maxLength={10}
-                  className={`w-[250px] md:w-full mt-5 border rounded-md px-3 py-3 sm:px-3 sm:py-3 text-[15px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200 transition-all `}
+                  className={`w-full md:w-full mt-5 border rounded-md px-3 py-3 sm:px-3 sm:py-3 text-[15px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200 transition-all `}
                 />
               )}
             />
@@ -300,7 +300,7 @@ savePartialData(allValues);
       case "date":
         return (
           <div key={name} className="flex flex-col mb-8">
-            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug">
+            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug font-semibold">
               {field.label}
             </label>
 
@@ -388,7 +388,7 @@ savePartialData(allValues);
       case "slider":
         return (
           <div key={name} className="flex flex-col mb-6">
-            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug">
+            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug font-semibold">
               {field.label}
             </label>
 
@@ -438,7 +438,7 @@ savePartialData(allValues);
       case "select":
         return (
           <div key={name} className="flex flex-col mb-8 gap-5">
-            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug">
+            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug font-semibold">
               {field.label}
             </label>
 
@@ -470,7 +470,7 @@ savePartialData(allValues);
                       flex items-center justify-center text-center
                       w-[35vw] max-w-[200px] min-w-[90px]
                       h-[90px] sm:h-[95px] md:h-[70px] min-h-[65px]
-                      text-[13px] sm:text-[13px] md:text-[16px]
+                      text-[15px] sm:text-[14px] md:text-[16px]
                       transform
                       ${
                         isActive
@@ -592,7 +592,7 @@ savePartialData(allValues);
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 text-[15px] bg-gray-200 hover:bg-gray-300 rounded-lg transition ease-in-out duration-200 cursor-pointer"
+                    className="w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 text-[15px] bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition ease-in-out duration-200 cursor-pointer"
                   >
                     ← Previous
                   </button>
@@ -603,7 +603,7 @@ savePartialData(allValues);
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="w-full sm:w-auto mt-2 sm:mt-0 px-5 py-3 sm:px-8 sm:py-3 text-[15px] bg-green-600 hover:bg-green-700 text-white rounded-lg transition ease-in-out duration-200 cursor-pointer"
+                    className="w-full sm:w-auto mt-2 sm:mt-0 px-5 py-3 sm:px-8 sm:py-3 text-[15px] bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition ease-in-out duration-200 cursor-pointer"
                   >
                     Next →
                   </button>

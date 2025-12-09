@@ -276,7 +276,7 @@ savePartialData(allValues)
                   {...rhfField}
                   placeholder="Enter 10-digit phone number"
                   maxLength={10}
-                  className={`w-[250px] md:w-full mt-5 border rounded-md px-3 py-3 sm:px-3 sm:py-3 text-[15px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200 transition-all ${
+                  className={`w-full md:w-full mt-5 border rounded-md px-3 py-3 sm:px-3 sm:py-3 text-[15px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200 transition-all ${
                     errors[name]
                       ? "border-red-500 text-red-600 focus:ring-red-400"
                       : "border-gray-300 focus:border-blue-500"
@@ -418,7 +418,7 @@ savePartialData(allValues)
         return (
           <div key={name} className="flex flex-col mb-8 w-full">
             {/* Label */}
-            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl   font-semibold text-black leading-snug w-[230px]  md:w-full text-center">
+            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl   font-semibold text-black leading-snug w-full  md:w-full text-center">
               {field.label}
             </label>
 

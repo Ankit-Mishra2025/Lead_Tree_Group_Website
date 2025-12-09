@@ -201,7 +201,7 @@ savePartialData(allValues)
 
   // All Inputs Styling
  const inputClass = `
-   w-full mt-8 px-3 py-3 text-[14px] sm:text-[14px] md:text-[16px]
+   w-full mt-8 px-3 py-3 text-[15px] sm:text-[14px] md:text-[16px]
     border rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200
     transition-all duration-300 ease-in-out
     hover:translate-y-1 hover:scale-103
@@ -291,7 +291,7 @@ savePartialData(allValues)
       case "slider":
         return (
           <div key={name} className="flex flex-col mb-6 ">
-            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-[250px]  md:w-full">
+            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug  w-full  md:w-full flex items-center ">
               {field.label}
             </label>
             <Controller
@@ -379,7 +379,7 @@ savePartialData(allValues)
                       },
                       "& .MuiSelect-select": {
                         padding: { xs: "15px", sm: "14px", md: "16px" },
-                        fontSize: { xs: "13px", sm: "15px", md: "17px" },
+                        fontSize: { xs: "14px", sm: "16px", md: "17px" },
                         color: rhfField.value ? "black" : "#6B7280",
                       },
                     }}
