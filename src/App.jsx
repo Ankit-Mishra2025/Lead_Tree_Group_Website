@@ -19,6 +19,7 @@ import BikeValuationLoan from "./LoanForms/forms/components/BikeSellLoanForm/Bik
 import CreditCardNavbar from "./Components/CreditCardNavbar";
 import AutoBuyForm from "./LoanForms/forms/components/AutoBuyForm/AutoBuyForm";
 import FilterBuyedCar from "./LoanForms/forms/components/AutoBuyForm/FilterBuyedCar";
+import SubmitNotificationPage from "./Components/SubmitNotificationPage";
 // import FinanceBlogPage from "./LoanPagesBanners/FinanceBlogPage";
 
 const MainLayout = () => (
@@ -32,6 +33,7 @@ const MainLayout = () => (
     <FinanceSlider />
     {/* <FinanceBlogPage/> */}
     <Footer />
+    <SubmitNotificationPage/>
   </div>
 );
 
@@ -59,7 +61,14 @@ const appRouter = createBrowserRouter([
   {
     path:"/Buycar-browse/FilteredCard",
     element:<FilterBuyedCar/>
+  },
+
+   {
+    path:"/successPage",
+    element:<SubmitNotificationPage/>
   }
+
+
 ]);
 
 // 🧩 Common layout for pages that should show Nav + Home

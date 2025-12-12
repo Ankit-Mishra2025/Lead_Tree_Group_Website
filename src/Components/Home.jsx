@@ -12,6 +12,7 @@ import {
   Car,
   House,
   HouseHeartIcon,
+  CarFront,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,6 +25,7 @@ import AutoLoanBanner from "../LoanPagesBanners/AutoLoanBanner";
 import DebtReliefBanner from "../LoanPagesBanners/DebtReliefBanner";
 import VehicleBanner from "../LoanPagesBanners/VehicleBanner";
 import CreditLoanBanner from "../LoanPagesBanners/CreditLoanBanner";
+import AutoInsuranceBanner from "../LoanPagesBanners/AutoInsuranceBanner";
 
 const HomeCarousel = () => {
   const [active, setActive] = useState(0);
@@ -69,6 +71,12 @@ const HomeCarousel = () => {
       name: "Vehicle Loan",
       icon: <Car size={24} />,
       banner: <VehicleBanner />,
+    },
+
+    {
+      name: "Auto Insurance",
+      icon: <CarFront size={24} />,
+      banner: <AutoInsuranceBanner />,
     },
   ];
 

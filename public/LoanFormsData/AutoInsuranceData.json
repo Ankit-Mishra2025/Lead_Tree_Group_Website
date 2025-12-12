@@ -1,0 +1,203 @@
+[
+  {
+    "step": 1,
+    "title": "Vehicle Information",
+    "fields": [
+      {
+        "name": "vehicleBrand",
+        "label": "Select Vehicle Brand",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Maruti Suzuki", "Hyundai", "Tata Motors", "Mahindra", "Honda",
+          "Toyota", "Kia", "MG Motors", "Volkswagen", "Skoda", "Nissan",
+          "Renault", "Ford", "Jeep", "BMW", "Mercedes-Benz", "Audi", "Volvo",
+          "Lexus", "Jaguar"
+        ]
+      },
+      {
+        "name": "vehicleModel",
+        "label": "Select Vehicle Model",
+        "type": "select",
+        "required": true,
+        "dependentOn": "vehicleBrand",
+        "options": {
+          "Maruti Suzuki": ["Swift", "Baleno", "Dzire", "WagonR", "Ertiga"],
+          "Hyundai": ["i10", "i20", "Creta", "Verna", "Venue"],
+          "Tata Motors": ["Nexon", "Altroz", "Harrier", "Punch", "Safari"],
+          "Mahindra": ["XUV700", "Thar", "Scorpio", "Bolero", "XUV300"],
+          "Honda": ["City", "Amaze", "Jazz", "WR-V", "Civic"],
+          "Toyota": ["Innova Crysta", "Fortuner", "Glanza", "Hyryder", "Camry"],
+          "Kia": ["Seltos", "Sonet", "Carens", "EV6", "Carnival"],
+          "MG Motors": ["Hector", "Astor", "Gloster", "ZS EV"],
+          "Volkswagen": ["Polo", "Virtus", "Taigun", "Tiguan"],
+          "Skoda": ["Slavia", "Kushaq", "Superb", "Octavia"],
+          "Nissan": ["Magnite", "Kicks", "Sunny"],
+          "Renault": ["Kwid", "Triber", "Duster", "Kiger"],
+          "Ford": ["Ecosport", "Endeavour", "Figo", "Aspire"],
+          "Jeep": ["Compass", "Meridian", "Wrangler"],
+          "BMW": ["X1", "X3", "X5", "3 Series", "5 Series"],
+          "Mercedes-Benz": ["A-Class", "C-Class", "E-Class", "GLA", "GLC"],
+          "Audi": ["A3", "A4", "Q3", "Q5", "Q7"],
+          "Volvo": ["XC40", "XC60", "S60", "XC90"],
+          "Lexus": ["ES 300h", "NX 350h", "RX 500h"],
+          "Jaguar": ["XF", "F-Pace", "XE"]
+        }
+      },
+      {
+        "name": "vehicleYear",
+        "label": "Select Vehicle Year",
+        "type": "select",
+        "required": true,
+        "options": ["2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"]
+      },
+      {
+        "name": "fuelType",
+        "label": "Select Fuel Type",
+        "type": "select",
+        "required": true,
+        "options": ["Diesel", "Petrol", "CNG", "Electric"]
+      },
+      
+      {
+        "name": "location",
+        "label": "Your City",
+        "type": "select",
+        "required": true,
+        "options": ["Delhi","Mumbai","Bangalore","Chennai","Hyderabad","Pune","Kolkata","Ahmedabad","Chandigarh","Jaipur","Lucknow","Indore","Surat","Bhopal","Nagpur"]
+      }
+    ]
+  },
+  {
+    "step": 2,
+    "title": "Insurance Information",
+    "fields": [
+      {
+        "name": "currentlyInsured",
+        "label": "Are you currently insured?",
+        "type": "select",
+        "options": ["yes", "no"],
+        "required": true
+      },
+      {
+        "name": "insuranceDetails",
+        "showIf": { "currentlyInsured": "yes" },
+        "fields": [
+          {
+            "name": "insuranceCompany",
+            "label": "Insurance Company Name",
+            "type": "text",
+            "placeholder": "Enter insurance company"
+          },
+          {
+            "name": "insuranceYears",
+            "label": "Years with this company",
+            "type": "select",
+            "options": ["1","2","3","4","5"]
+          }
+        ]
+      },
+      
+      {
+        "name": "faultAccident",
+        "label": "Any fault accident in last 3 years?",
+        "type": "select",
+        "options": ["yes", "no"],
+        "required": true
+      },
+      {
+        "name": "dui",
+        "label": "Any DUI in last 3 years?",
+        "type": "select",
+        "options": ["yes", "no"],
+        "required": true
+      },
+      {
+        "name": "compareRates",
+        "label": "Do you want to compare rates from multiple companies?",
+        "type": "select",
+        "options": ["yes", "no"],
+        "required": true
+      }
+    ]
+  },
+  {
+    "step": 3,
+    "title": "Personal Information",
+    "fields": [
+      {
+        "name": "dob",
+        "label": "Date of Birth",
+        "type": "date",
+        "required": true
+      },
+      {
+        "name": "gender",
+        "label": "Gender",
+        "type": "select",
+        "options": ["Male","Female","Other"],
+        "required": true
+      },
+      {
+        "name": "married",
+        "label": "Married?",
+        "type": "select",
+        "options": ["yes","no"],
+        "required": true
+      },
+      {
+        "name": "spouseMilitary",
+        "label": "Is your spouse an active or honorably discharged US military veteran?",
+        "type": "select",
+        "options": ["yes","no"],
+        "required": true
+      },
+      {
+        "name": "firstName",
+        "label": "First Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "lastName",
+        "label": "Last Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "address",
+        "label": "Street Address",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "city",
+        "label": "City",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "zip",
+        "label": "ZIP Code",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "Email Address",
+        "type": "email",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "label": "Phone Number",
+        "type": "phone",
+        "required": true,
+        "validation": {
+          "pattern": "^[0-9]{10}$",
+          "message": "Enter valid 10-digit phone number"
+        }
+      }
+    ]
+  }
+]

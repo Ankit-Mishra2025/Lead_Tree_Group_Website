@@ -30,6 +30,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Lock, Speed } from "@mui/icons-material";
 import { differenceInYears } from "date-fns";
 import { Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -151,10 +152,16 @@ const savePartialData = async (data:any) => {
 };
 
 
+const navigate=useNavigate()
 
  const onSubmit = async (data:any) => {
   try {
     setSubmitLoader(true)
+
+    setTimeout(() => {
+      setSubmitLoader(false)
+      navigate("/successPage")
+    },1000);
     const payload = {
       secret_token: "cc-ASJFSNFRGF",
       data_list: [
@@ -184,7 +191,7 @@ const savePartialData = async (data:any) => {
     const result = await res.json();  
     console.log("API Response ", result);
 
-    toast.success("Successfully Submitted!");
+
 
   } catch (error) {
     console.error(error);

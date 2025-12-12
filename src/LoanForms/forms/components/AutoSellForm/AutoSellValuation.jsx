@@ -25,6 +25,10 @@ const AutoSellValuation = () => {
     Mobile: "",
   });
 
+
+  
+
+
   // ✅ Unified search inputs
   const [search, setSearch] = useState({
     brand: "",
@@ -72,45 +76,38 @@ const AutoSellValuation = () => {
     []
   );
 
+  const updateAndNext = (key, value, isFinal = false) => {
+    setSelected((prev) => {
+      const updated = { ...prev, [key]: value };
+      savePartialData(updated);
+      return updated;
+    });
 
+    setDirection(1);
 
-const updateAndNext = (key, value, isFinal = false) => {
+    if (isFinal) {
+      resetAllFields(); // Reset all states
+       // Back to first step
+      return; // Stop here
+    }
 
-  setSelected((prev) => {
-    const updated = { ...prev, [key]: value };
-    savePartialData(updated);
-    return updated;
-  });
+    setStep((prev) => prev + 1);
+  };
 
-  setDirection(1);
+  const resetAllFields = () => {
+    setSelected({
+      brand: "",
+      model: "",
+      year: "",
+      fuel: "",
+      location: "",
+      sellTime: "",
+      Mobile: "",
+    });
 
-  if (isFinal) {
-    resetAllFields();       // Reset all states
-    setStep(1);             // Back to first step
-    return;                 // Stop here
-  }
-
-  setStep(prev => prev + 1);
-};
-
-
-const resetAllFields = () => {
-  setSelected({
-    brand: "",
-    model: "",
-    year: "",
-    fuel: "",
-    location: "",
-    sellTime: "",
-    Mobile: "",
-  });
-
-  setMobile("");
-  setSearch({ brand: "", model: "", location: "" });
-};
-
-
-
+    setMobile("");
+    setSearch({ brand: "", model: "", location: "" });
+  };
 
   const savePartialData = async (data) => {
     console.log("Saving partial:", data); // ⭐ console pe full data
@@ -167,16 +164,20 @@ const resetAllFields = () => {
       e.preventDefault();
       console.log("Input Registration is", InputResult);
       toast.success("Your Query is loaded");
-      navigate("/Car-Valuation");
+      
     },
     [InputResult, navigate]
   );
 
   const onSubmit = async (e) => {
-  
     try {
-       updateAndNext("Mobile", Mobile, true);
+      updateAndNext("Mobile", Mobile, true);
       setSubmitLoader(true);
+
+      setTimeout(() => {
+      setSubmitLoader(false)
+      navigate("/successPage")
+    },1000);
       e.preventDefault();
 
       const payloadData = {
@@ -216,7 +217,7 @@ const resetAllFields = () => {
         }
       );
 
-      toast.success("Successfully Submitted!");
+    
     } catch (error) {
       console.log("Error ", error);
     } finally {
@@ -288,7 +289,7 @@ const resetAllFields = () => {
 
       <form
         onSubmit={onSubmit}
-        className="top-10 relative z-10 flex flex-col items-center justify-start bg-gray-100 rounded-xl shadow-md max-w-[700px] w-[96%] sm:w-[88%] md:max-w-3xl h-[460px] px-4 sm:px-8 md:px-10 py-10 sm:py-10 mx-auto opacity-95 backdrop-blur-md overflow-y-auto overflow-x-hidden"
+        className="top-10 relative z-10 flex flex-col items-center justify-start bg-gray-100 rounded-xl shadow-md max-w-[800px] w-[98%] sm:w-[88%] md:max-w-3xl h-[480px] px-4 sm:px-8 md:px-10 py-10 sm:py-10 mx-auto opacity-95 backdrop-blur-md overflow-y-auto overflow-x-hidden"
       >
         {/* Header Section */}
         {step <= 1 && (
@@ -350,6 +351,7 @@ const resetAllFields = () => {
         <div className="relative w-full min-h-[360px]">
           <AnimatePresence custom={direction} mode="wait">
             {/* Step 1 */}
+            
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -385,8 +387,7 @@ const resetAllFields = () => {
                     filteredBrands.map((brand, i) => (
                       <div
                         key={i}
-                         onClick={() => updateAndNext("brand", brand.name)}
-
+                        onClick={() => updateAndNext("brand", brand.name)}
                         className={`flex flex-col items-center justify-center bg-slate-50 shadow-sm rounded-md cursor-pointer transition-all  ${
                           selected.brand === brand.name
                             ? "border-green-500 shadow-md"
@@ -411,6 +412,9 @@ const resetAllFields = () => {
                 </div>
               </motion.div>
             )}
+
+
+
 
             {/* Step 2 - Model */}
             {step === 2 && (
@@ -447,8 +451,7 @@ const resetAllFields = () => {
                     filteredModels.map((model, i) => (
                       <div
                         key={i}
-                       onClick={() => updateAndNext("model", model)}
-
+                        onClick={() => updateAndNext("model", model)}
                         className={`flex items-center justify-center px-3 py-6 bg-slate-100  rounded-lg hover:border-green-400 cursor-pointer border border-gray-300 shadow-xs ${
                           selected.model === model
                             ? "border-green-500 shadow-md"
@@ -487,8 +490,7 @@ const resetAllFields = () => {
                   {sellCarData?.years?.map((year, i) => (
                     <div
                       key={i}
-                     onClick={() => updateAndNext("year", year)}
-
+                      onClick={() => updateAndNext("year", year)}
                       className={`flex items-center justify-center px-10 py-6 sm:px-10 sm:py-5 bg-gray-100 border border-gray-300 shadow-xs ${
                         selected.year === year
                           ? "border-green-500 shadow-md"
@@ -524,7 +526,6 @@ const resetAllFields = () => {
                     <div
                       key={i}
                       onClick={() => updateAndNext("fuel", fuels)}
-
                       className={`flex items-center justify-center px-3 py-6 sm:px-5 sm:py-10 bg-gray-100 border border-gray-300 shadow-xs ${
                         selected.fuel === fuels
                           ? "border-green-500 shadow-md"
@@ -578,7 +579,7 @@ const resetAllFields = () => {
                     filteredLocations.map((location, i) => (
                       <div
                         key={i}
-               onClick={()=>updateAndNext("location",location)}
+                        onClick={() => updateAndNext("location", location)}
                         className={`flex items-center justify-center px-3 py-3 sm:px-5 sm:py-5 bg-gray-100 border border-gray-300 shadow-xs  ${
                           selected.location === location
                             ? "border-green-500 shadow-md"
@@ -618,7 +619,6 @@ const resetAllFields = () => {
                     <div
                       key={i}
                       onClick={() => updateAndNext("sellTime", sellperiod)}
-
                       className={`flex items-center justify-center w-full py-4 sm:py-5 bg-gray-100 border ${
                         selected.sellTime === sellperiod
                           ? "border-green-500 shadow-md"
@@ -664,9 +664,6 @@ const resetAllFields = () => {
                     <button
                       type="submit"
                       disabled={submitLoader}
-                    
-                      
-                      
                       className="bg-green-500 hover:bg-green-600 text-white font-semibold  py-3 rounded-lg transition-all duration-300 w-70 text-[18px] cursor-pointer"
                     >
                       {submitLoader ? (

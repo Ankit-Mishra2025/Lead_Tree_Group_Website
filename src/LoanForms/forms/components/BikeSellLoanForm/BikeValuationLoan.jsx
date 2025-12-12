@@ -90,7 +90,7 @@ const[Mobile,setMobile]=useState("")
 
     if (isFinal) {
       resetAllFields(); // Reset all states
-      setStep(1); // Back to first step
+     
       return; // Stop here
     }
 
@@ -180,6 +180,13 @@ setMobile("");
     try {
        updateAndNext("Mobile", Mobile, true);
          setSubmitLoader(true);
+
+
+         setTimeout(() => {
+      setSubmitLoader(false)
+      navigate("/successPage")
+    },1000);
+
       e.preventDefault();
 
       const payloadData = {
@@ -221,7 +228,7 @@ setMobile("");
         }
       );
 
-      toast.success("Successfully Submitted!");
+    
     } catch (error) {
       console.log("Error ", error);
     } finally {

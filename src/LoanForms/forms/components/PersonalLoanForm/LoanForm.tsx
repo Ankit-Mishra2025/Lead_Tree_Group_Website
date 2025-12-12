@@ -24,6 +24,8 @@ import { personalLoanSchema, PersonalLoanSchemaType } from "./schema";
 import { Lock, Speed } from "@mui/icons-material";
 import toast, { Toaster } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
+import SubmitNotificationPage from "../../../../Components/SubmitNotificationPage";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -142,11 +144,17 @@ const savePartialData = async (data:any) => {
 };
 
 
-
+const navigate=useNavigate()
 
 const onSubmit = async (data: any) => {
   try {
     setSubmitLoader(true); // 🔥 START LOADER immediately
+
+  setTimeout(() => {
+    setSubmitLoader(false);
+   navigate("/successPage")
+  }, 1000);
+
 
     const payload = {
       secret_token: "cc-ASJFSNFRGF",
@@ -176,7 +184,7 @@ const onSubmit = async (data: any) => {
 
     const result = await res.json();
 
-    toast.success("Successfully Submitted!");
+  
   } catch (error) {
     console.error(error);
     toast.error("API Failed");
@@ -738,6 +746,10 @@ const onSubmit = async (data: any) => {
   ) : (
     "Register"
   )}
+
+
+ 
+
 </button>
 
             )}

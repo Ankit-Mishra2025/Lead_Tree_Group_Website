@@ -21,6 +21,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Lock, Speed } from "@mui/icons-material";
 import { differenceInYears } from "date-fns";
 import { Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function AutoLoanForm() {
   const [steps, setSteps] = useState<any[]>([]);
@@ -149,11 +150,17 @@ const savePartialData = async (data:any) => {
   }
 };
 
-
+const navigate=useNavigate()
 
  const onSubmit = async (data:any) => {
   try {
     setSubmitLoader(true)
+
+    setTimeout(() => {
+      setSubmitLoader(false)
+      navigate("/successPage")
+    },1000);
+
     const payload = {
       secret_token: "cc-ASJFSNFRGF",
       data_list: [

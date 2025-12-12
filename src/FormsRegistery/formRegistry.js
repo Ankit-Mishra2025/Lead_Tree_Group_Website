@@ -26,4 +26,11 @@ export const formRegistry = {
     import(
       "../LoanForms/forms/components/CreditCardForm/CreditCardFormPage.jsx"
     ),
+     autoInsurance: () =>
+    import(
+      "../LoanForms/forms/components/AutoInsuranceForm/AutoInsurance.jsx"
+    ),
+   
+
+
 };
