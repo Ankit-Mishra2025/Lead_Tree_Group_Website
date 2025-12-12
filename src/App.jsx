@@ -33,7 +33,7 @@ const MainLayout = () => (
     <FinanceSlider />
     {/* <FinanceBlogPage/> */}
     <Footer />
-    <SubmitNotificationPage/>
+    
   </div>
 );
 
