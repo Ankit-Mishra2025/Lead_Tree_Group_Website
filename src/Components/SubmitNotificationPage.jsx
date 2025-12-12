@@ -1,48 +1,60 @@
 import { ArrowLeft, Check } from "lucide-react";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+
 const SubmitNotificationPage = () => {
-const navigate=useNavigate()
-
-
-
   return (
-    <div className="w-full flex items-center justify-center flex-col min-h-screen p-5">
+    <div className="w-full min-h-screen flex items-center justify-center p-3 bg-gradient-to-b from-[#f8fafc] to-[#eef2f7]">
 
- <motion.div
-        initial={{ opacity: 0, y: -80 }}     // page upar se aayega
-        animate={{ opacity: 1, y: 0 }}       // center me settle
+      <motion.div
+        initial={{ opacity: 0, y: -80 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-<div className="flex flex-col bg-white shadow-md border border-gray-300 gap-3 py-8 px-3 md:p-5 items-center justify-center rounded-md  cursor-pointer">
-        <span className="flex w-full items-center justify-center gap-2 font-semibold md:text-[22px] text-[17px] ">
-          <Check
-            className="text-white font-extrabold md:h-10 md:w-10 h-6 w-6 rounded-full bg-green-400 "
-            size={25}
-          />{" "}
-          Thank you!
-        </span>
-        <h2 className="flex w-full items-center justify-center flex-col font-semibold text-[15px] md:text-[17px]">
-          {" "}
-          We’ve received your application
-        </h2>
-        <span className="text-gray-800 text-[14px] md:text-[16px]">
-          Our team is reviewing your information with the best offers for you 🎉
-        </span>
-        <span>We’ll be in touch soon.😊</span>
-        <div className="w-full flex items-center justify-between">
-          <Link to="/" className="text-blue-600 flex items-center justify-center cursor-pointer  ">
-            <ArrowLeft /> Back to Home
+        <div className="flex flex-col items-center justify-center gap-4 bg-white/80 backdrop-blur-xl shadow-xl border border-gray-200 rounded-2xl py-10 px-6 md:px-10 w-full max-w-lg">
+
+         
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 180, damping: 15 }}
+          >
+            <Check className="h-12 w-12 md:h-14 md:w-14 bg-green-500 text-white rounded-full p-2 shadow-md" />
+          </motion.div>
+
+          {/* Title */}
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">
+            Thank you!
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-gray-700 text-center text-[15px] md:text-[17px] font-semibold">
+            We’ve received your application
+          </p>
+
+          {/* Message */}
+          <p className="text-gray-600 text-center text-[14px] md:text-[16px] leading-relaxed">
+            Our team is reviewing your information with the best offers for you 🎉.
+            <br />
+            
+            We’ll get back to you soon!
+          </p>
+
+          {/* Divider */}
+          <div className="h-[1px] w-full bg-gray-200 my-2"></div>
+
+          {/* CTA Button */}
+          <Link
+            to="/"
+            className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 transition text-white rounded-md shadow-sm font-medium"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
           </Link>
         </div>
-      </div>
+      </motion.div>
 
-</motion.div>
-
-
-
-      
     </div>
   );
 };
