@@ -6,6 +6,7 @@ import BackgroundImage from "/src/assets/Background.webp";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { containerClasses } from "@mui/material";
+import { useForm } from "react-hook-form";
 
 const AutoInsurance = () => {
   const [sellCarData, setSellCarData] = useState(null);
@@ -15,24 +16,38 @@ const AutoInsurance = () => {
   const [Mobile, setMobile] = useState("");
   const [submitLoader, setSubmitLoader] = useState(false);
 
+
+
+
+
+
   // ✅ Unified selected data (less state)
   const [selected, setSelected] = useState({
-    brand: "",
-    model: "",
-    year: "",
-    fuel: "",
-    location: "",
-    owner: "",
-    gender: "",
-    married: "",
-    accidentFault: "",
-    spouseMilitaryOptions: "",
-    insuranceOptions: "",
-    secondVehicle: "",
-    lastStep: "",
-    Mobile: "",
-    PersonalData: "",
-  });
+  brand: "",
+  model: "",
+  year: "",
+  fuel: "",
+  location: "",
+  owner: "",
+  gender: "",
+  married: "",
+  accidentFault: "",
+  spouseMilitaryOptions: "",
+  insuranceOptions: "",
+  secondVehicle: "",
+  lastStep: "",
+  Mobile: "",
+
+  // 👇 PERSONAL INFO
+  firstName: "",
+  lastName: "",
+  email: "",
+  dob: "",
+  address: "",
+  city: "",
+  zip: "",
+});
+
 
   
 const [secondVehicleValues, setSecondVehicleValues] = useState({
@@ -65,25 +80,115 @@ const handleInsuranceSelection = (value) => {
   }
 }
 
-  const [PersonalData, setPersonalData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    dob: "",
-    address: "",
-    city: "",
-    zip: "",
+  const [PersonalData, setPersonalData] = useState([
+  {
+    id: "firstName",
+    label: "First Name",
+    type: "text",
+    required: true,
+    placeholder: "Enter first name",
+  },
+  {
+    id: "lastName",
+    label: "Last Name",
+    type: "text",
+    required: true,
+    placeholder: "Enter last name",
+  },
+  {
+    id: "email",
+    label: "Email",
+    type: "email",
+    required: true,
+    placeholder: "Enter email",
+  },
+  {
+    id: "dob",
+    label: "DOB",
+    type: "date",
+    required: true,
+  },
+  {
+    id: "address",
+    label: "Address",
+    type: "text",
+    required: true,
+  },
+  {
+    id: "city",
+    label: "City",
+    type: "text",
+    required: true,
+  },
+  {
+    id: "zip",
+    label: "ZIP",
+    type: "text",
+    required: true,
+  },
+]);
+
+
+  
+
+
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+} = useForm({
+  mode: "onBlur", // blur pe validation
+});
+
+const getRules = (field) => {
+  const rules = {
+    required: field.required ? `${field.label} is required` : false,
+  };
+
+  if (field.type === "email") {
+    rules.pattern = {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Enter valid email address",
+    };
+  }
+
+  if (field.id === "zip") {
+    rules.pattern = {
+      value: /^[0-9]{5,6}$/,
+      message: "Enter valid ZIP code",
+    };
+  }
+
+  if (field.id === "dob") {
+    rules.validate = {
+      yearCheck: (value) => {
+        if (!value) return true;
+        const [year] = value.split("-");
+        if (year.length !== 4) return "Year must be 4 digits";
+        if (+year > new Date().getFullYear())
+          return "Future date not allowed";
+        return true;
+      },
+    };
+  }
+
+  return rules;
+};
+
+
+const handlePersonalNext = handleSubmit((data) => {
+  setSelected((prev) => {
+    const updated = { ...prev, ...data };
+    savePartialData(updated); // ✅ PARTIAL SAVE
+    return updated;
   });
 
-  const [personalValues, setPersonalValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    dob: "",
-    address: "",
-    city: "",
-    zip: "",
-  });
+  setStep(14); // ✅ go to final step
+});
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -151,23 +256,16 @@ const handleInsuranceSelection = (value) => {
     []
   );
 
-  const updateAndNext = (key, value, isFinal = false) => {
-    setSelected((prev) => {
-      const updated = { ...prev, [key]: value };
-      savePartialData(updated);
-      return updated;
-    });
+  const updateAndNext = (key, value) => {
+  setSelected((prev) => {
+    const updated = { ...prev, [key]: value };
+    savePartialData(updated);
+    return updated;
+  });
 
-    setDirection(1);
-
-    if (isFinal) {
-      resetAllFields(); // Reset all states
-    
-      return; // Stop here
-    }
-
-    setStep((prev) => prev + 1);
-  };
+  setDirection(1);
+  setStep((prev) => prev + 1);
+};
 
   const resetAllFields = () => {
     setSelected({
@@ -283,8 +381,14 @@ const handleInsuranceSelection = (value) => {
         insuranceOptions: selected.insuranceOptions,
         secondVehicle: selected.secondVehicle,
         lastStep: selected.lastStep,
-        Mobile: Mobile,
-        ...personalValues,
+     
+        firstName: selected.firstName,
+    lastName: selected.lastName,
+    email: selected.email,
+    dob: selected.dob,
+    address: selected.address,
+    city: selected.city,
+    zip: selected.zip,
       };
 
       const payload = {
@@ -1059,59 +1163,65 @@ const handleInsuranceSelection = (value) => {
 
 
             {step === 13 && (
-              <motion.div
-                key="step13"
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="flex flex-col items-center justify-center w-full mt-8"
-              >
-                <div className="w-full grid grid-cols-2 gap-3 ">
-                  {PersonalData.map((infoData) => {
-                    return (
-                      <div key={infoData.id} className=" w-full">
-                        <div className="flex w-full items-center justify-center">
-                          <h2 className="text-[18px] md:text-[15px] sm:text-[15px] text-center font-semibold  text-gray-800 w-30 flex items-center justify-center">
-                            {infoData.label}
-                          </h2>
-                          <input
-                            type={infoData.type}
-                            required
-                            placeholder={infoData.placeholder}
-                            value={personalValues[infoData.id] || ""}
-                            onChange={(e) =>
-                              setPersonalValues((prev) => ({
-                                ...prev,
-                                [infoData.id]: e.target.value,
-                              }))
-                            }
-                            className="w-full mt-5 border rounded-md px-2 py-3 sm:px-4 sm:py-3 text-[14px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 outline-none transition-all duration-200 focus:ring-1 focus:ring-green-500 "
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+  <motion.div
+    key="step13"
+    custom={direction}
+    variants={variants}
+    initial="enter"
+    animate="center"
+    exit="exit"
+    className="flex flex-col items-center justify-center w-full"
+  >
+    <h2 className="text-3xl font-semibold">Your Personal Info</h2>
 
-                <div className=" relative grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 mt-2 left-90  ">
-                  {sellCarData?.lastStep?.map((LastStep, i) => {
-                    return (
-                      <div
-                        key={i}
-                        onClick={() => updateAndNext("LastStep", LastStep)}
-                        className={`flex items-center justify-center px-3 py-5 md:px-6 md:py-3  sm:px-5 sm:py-10 bg-gray-100 border border-gray-300 rounded-lg shadow-sm hover:shadow-md hover:bg-green-600 hover:text-white cursor-pointer transition-all duration-200 `}
-                      >
-                        <span className="text-gray-700 font-medium text-[14px] md:text-[18px] sm:text-sm text-center px-2   ">
-                          {LastStep}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </motion.div>
+    <div
+      
+      className="w-full grid grid-cols-2 gap-3 mt-2"
+    >
+      {PersonalData.map((infoData) => (
+        <div key={infoData.id} className="w-full">
+          <div className="flex w-full flex-col">
+            <h2 className="text-[18px] md:text-[15px] sm:text-[15px] font-semibold text-gray-800">
+              {infoData.label}
+            </h2>
+
+            <input
+              type={infoData.type}
+              placeholder={infoData.placeholder}
+              {...register(infoData.id, getRules(infoData))}
+              className={`w-full mt-2 border rounded-md px-2 py-3 sm:px-4 sm:py-3 text-[14px] sm:text-[16px]
+                outline-none transition-all duration-200
+                ${
+                  errors[infoData.id]
+                    ? "border-red-500 focus:ring-red-500"
+                    : "focus:ring-1 focus:ring-green-500"
+                }`}
+            />
+
+            {errors[infoData.id] && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors[infoData.id].message}
+              </p>
             )}
+          </div>
+        </div>
+      ))}
+
+      {/* Hidden submit button (validation ke liye) */}
+      <button
+  type="button"
+  onClick={handlePersonalNext}
+  className="px-5 py-3 font-semibold cursor-pointer bg-green-500 text-white rounded-lg"
+>
+  Continue
+</button>
+      
+    </div>
+
+    
+  </motion.div>
+)}
+
 
             {/* Step 14 */}
             {step === 14 && (

@@ -35,7 +35,7 @@ const SubmitNotificationPage = () => {
 
           {/* Message */}
           <p className="text-gray-600 text-center text-[14px] md:text-[16px] leading-relaxed">
-            Our team is reviewing your information with the best offers for you 🎉.
+            Our team is reviewing your information with the best offers for you🎉.
             <br />
             
             We’ll get back to you soon!
