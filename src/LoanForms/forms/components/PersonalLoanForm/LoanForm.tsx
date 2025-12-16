@@ -15,8 +15,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-
-
 import PhoneInput from "react-phone-input-2";
 
 import { differenceInYears } from "date-fns";
@@ -27,15 +25,11 @@ import { Loader2 } from "lucide-react";
 import SubmitNotificationPage from "../../../../Components/SubmitNotificationPage";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 export default function PersonalLoanForm() {
   const [steps, setSteps] = useState<any[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-  const[submitLoader,setSubmitLoader]=useState<boolean>(false)
-
+  const [submitLoader, setSubmitLoader] = useState<boolean>(false);
 
   const storedData =
     typeof window !== "undefined"
@@ -59,8 +53,6 @@ export default function PersonalLoanForm() {
         homeavaliablity: "",
       };
 
-
- 
   const {
     control,
     handleSubmit,
@@ -108,117 +100,111 @@ export default function PersonalLoanForm() {
     };
   }, []);
 
-
-
-const savePartialData = async (data:any) => {
-  console.log("Saving partial:", data);  // ⭐ console pe full data
-  
-  const payload = {
-    secret_token: "cc-ASJFSNFRGF",
-    data_list: [
-      {
-        source_name: "api_partial_save",
-        json_data: {
-          loan_type: "personal_loan",
-          ...data
-        }
-      }
-    ]
-  };
-
-  try {
-    const response = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
-      method: "POST",
-      headers: {"Content-Type": "application/json",
-        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"},
-      body: JSON.stringify(payload)
-    });
-
-    const result = await response.json();
-    console.log("Partial Save Response:", result);
-    console.log("Payload Sent:", payload);
-
-  } catch (e) {
-    console.log("Partial save failed", e);
-  }
-};
-
-
-const navigate=useNavigate()
-
-const onSubmit = async (data: any) => {
-  try {
-    setSubmitLoader(true); // 🔥 START LOADER immediately
-
-  setTimeout(() => {
-    setSubmitLoader(false);
-   navigate("/successPage")
-  }, 1000);
-
+  const savePartialData = async (data: any) => {
+    console.log("Saving partial:", data); // ⭐ console pe full data
 
     const payload = {
       secret_token: "cc-ASJFSNFRGF",
       data_list: [
         {
-          source_name: "api_post_method",
+          source_name: "api_partial_save",
           json_data: {
             loan_type: "personal_loan",
-            ...data
+            ...data,
           },
-          bucket_is: "ach.zippycash.online",
-          active: true,
-          status: "on_submit",
-          remark: "-"
-        }
-      ]
+        },
+      ],
     };
 
-    const res = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"
-      },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch(
+        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
-    const result = await res.json();
+      const result = await response.json();
+      console.log("Partial Save Response:", result);
+      console.log("Payload Sent:", payload);
+    } catch (e) {
+      console.log("Partial save failed", e);
+    }
+  };
 
-  
-  } catch (error) {
-    console.error(error);
-    toast.error("API Failed");
-  } finally {
-    setSubmitLoader(false); // 🔥 STOP LOADER (success or fail)
-  }
-};
+  const navigate = useNavigate();
 
+  const onSubmit = async (data: any) => {
+    if (submitLoader) return;
 
+    try {
+      setSubmitLoader(true);
 
+      const payload = {
+        source_name: "api_post_method",
+        loan_type: "personal_loan",
+        bucket_is: "ach.zippycash.online",
+        active: true,
+        status: "on_submit",
+        remark: "-",
+
+        json_data: {
+          ...data,
+          creditScore: data.creditScore?.value || data.creditScore || "",
+        },
+      };
+
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbztOTLBBkGaTZbf1Gcq_8T9RvrSgm2C40TKM4zpReLGKQ2qCyhk0ti1kgC2pWDempvD1w/exec",
+        {
+          method: "POST",
+
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+      const result = await response.json();
+
+      if (!result || result.success !== true) {
+        throw new Error(result?.error || "Submission failed");
+      }
+
+      navigate("/successPage");
+    } catch (error: any) {
+      console.error("Submit Error:", error);
+      toast.error(error?.message || "Submission failed. Please try again.");
+    } finally {
+      setSubmitLoader(false);
+    }
+  };
 
   const onError = () => {
     toast.error("❌ Please fill all required fields correctly!");
   };
-
 
   const nextStep = async () => {
     const currentFields = steps
       .filter((_, idx) => idx === currentStep)
       .map((f) => f.name);
 
-  
     const valid = await trigger(currentFields, { shouldFocus: true });
 
     if (!valid) {
-     
       return;
     }
-  savePartialData(allValues);
+    savePartialData(allValues);
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
-        
-  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
+  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   // **Green focus for all inputs & select**
   const inputClass = `
@@ -239,7 +225,6 @@ const onSubmit = async (data: any) => {
   transition-all duration-300 ease-in-out
   hover:translate-y-1 hover:scale-103
 `;
-
 
   const renderField = (field: any) => {
     const name = field.name;
@@ -280,7 +265,7 @@ const onSubmit = async (data: any) => {
       case "phone":
         return (
           <div key={name} className="flex flex-col mb-6 ">
-              <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full">
+            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full">
               {field.label}
             </label>
 
@@ -322,8 +307,6 @@ const onSubmit = async (data: any) => {
             )}
           </div>
         );
-
-
 
       case "date":
         return (
@@ -388,7 +371,6 @@ const onSubmit = async (data: any) => {
                             backgroundColor: "#fff",
                             "&:hover": { transform: "scale(1.01)" },
                             "&.Mui-focused fieldset": {
-                            
                               boxShadow: "0 0 0 2px rgba(34,197,94,0.2)",
                               backgroundColor: "#F0FDF4",
                             },
@@ -407,9 +389,6 @@ const onSubmit = async (data: any) => {
             />
           </div>
         );
-
-
-
 
       case "slider":
         return (
@@ -462,8 +441,6 @@ const onSubmit = async (data: any) => {
             />
           </div>
         );
-
-
 
       case "select":
         return (
@@ -621,9 +598,6 @@ const onSubmit = async (data: any) => {
       </div>
     );
 
-
-
-
   return (
     <>
       <div className="relative flex flex-col items-center justify-center p-0 md:p-12">
@@ -660,8 +634,6 @@ const onSubmit = async (data: any) => {
           }}
         />
 
-
-      
         {/* Form Container */}
         <div className="w-full max-w-xl  p-6 md:p-8 rounded-lg  z-10">
           {/* Progress Bar */}
@@ -715,17 +687,12 @@ const onSubmit = async (data: any) => {
               </div>
             )}
 
-
-
-
             {/* Submit / Register Button */}
             {currentStep === steps.length - 1 && (
-
-
               <button
-  type="submit"
-  disabled={submitLoader}
-  className="
+                type="submit"
+                disabled={submitLoader}
+                className="
     w-full 
     px-4 py-3 sm:px-5 sm:py-4 
     text-[17px] sm:text-[18px]
@@ -737,29 +704,20 @@ const onSubmit = async (data: any) => {
     cursor-pointer
     disabled:opacity-70 disabled:cursor-not-allowed
   "
->
-  {submitLoader ? (
-    <div className="flex items-center justify-center gap-2">
-      <Loader2 className="animate-spin h-5 w-5" />
-      Submitting...
-    </div>
-  ) : (
-    "Register"
-  )}
-
-
- 
-
-</button>
-
+              >
+                {submitLoader ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <Loader2 className="animate-spin h-5 w-5" />
+                    Submitting...
+                  </div>
+                ) : (
+                  "Register"
+                )}
+              </button>
             )}
           </form>
         </div>
       </div>
-
-
-
-
 
       <div className="flex w-full flex-col justify-center items-center  sm:mt-5">
         {/* Secure Info */}
@@ -780,4 +738,4 @@ const onSubmit = async (data: any) => {
       </div>
     </>
   );
-}  
+}
