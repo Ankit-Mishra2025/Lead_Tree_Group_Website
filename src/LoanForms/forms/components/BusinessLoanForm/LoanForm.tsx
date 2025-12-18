@@ -135,52 +135,52 @@ const savePartialData = async (data:any) => {
 
 const navigate=useNavigate()
 
-const onSubmit = async (data:any) => {
-  try {
-    setSubmitLoader(true)
-    setTimeout(() => {
-      setSubmitLoader(false)
-      navigate("/successPage")
-    },1000);
+const onSubmit = async (data: any) => {
+    if (submitLoader) return;
 
-    const payload = {
-      secret_token: "cc-ASJFSNFRGF",
-      data_list: [
+    try {
+      setSubmitLoader(true);
+
+      const payload = {
+        formType: "BusinessLoan",
+        source_name: "api_post_method",
+        loan_type: "business_loan",
+        bucket_is: "ach.zippycash.online",
+        active: true,
+        status: "on_submit",
+        remark: "-",
+
+        json_data: {
+          ...data,
+          creditScore: data.creditScore?.value || data.creditScore || "",
+        },
+      };
+
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbx9itRP647YupPfHX8tKT_7F74Athjy1VZhPzdc_2srG_vFHF_lQPfp8ppugJVOERURQA/exec",
         {
-          source_name: "api_post_method",
-          json_data: {
-            loan_type: "business_loan",
-            ...data
-          },
-          bucket_is: "ach.zippycash.online",
-          active: true,
-          status: "on_submit",
-          remark: "-"
+          method: "POST",
+
+          body: JSON.stringify(payload),
         }
-      ]
-    };
+      );
 
-    const res = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"
-      },
-      body: JSON.stringify(payload),
-    });
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-    const result = await res.json();  
-    console.log("API Response ", result);
+      const result = await response.json();
 
-  
+      if (!result || result.success !== true) {
+        throw new Error(result?.error || "Submission failed");
+      }
 
-  } catch (error) {
-    console.error(error);
-    toast.error("API Failed");
-  }finally{
-    setSubmitLoader(false)
-  }
-};
+      navigate("/successPage");
+    } catch (error: any) {
+      console.error("Submit Error:", error);
+      toast.error(error?.message || "Submission failed. Please try again.");
+    } finally {
+      setSubmitLoader(false);
+    }
+  };
 
   const onError = () =>
     toast.error("❌ Please fill all required fields correctly!");

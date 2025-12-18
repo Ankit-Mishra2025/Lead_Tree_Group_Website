@@ -71,6 +71,8 @@ export default function PersonalLoanForm() {
     localStorage.setItem("PersonalLoanFormData", JSON.stringify(allValues));
   }, [allValues]);
 
+
+
   useEffect(() => {
     let mounted = true;
     const fetchSteps = async () => {
@@ -116,6 +118,7 @@ export default function PersonalLoanForm() {
       ],
     };
 
+    
     try {
       const response = await fetch(
         "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
@@ -147,6 +150,7 @@ export default function PersonalLoanForm() {
       setSubmitLoader(true);
 
       const payload = {
+        formType: "PersonalLoan",
         source_name: "api_post_method",
         loan_type: "personal_loan",
         bucket_is: "ach.zippycash.online",
@@ -161,7 +165,7 @@ export default function PersonalLoanForm() {
       };
 
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbztOTLBBkGaTZbf1Gcq_8T9RvrSgm2C40TKM4zpReLGKQ2qCyhk0ti1kgC2pWDempvD1w/exec",
+        "https://script.google.com/macros/s/AKfycbx9itRP647YupPfHX8tKT_7F74Athjy1VZhPzdc_2srG_vFHF_lQPfp8ppugJVOERURQA/exec",
         {
           method: "POST",
 

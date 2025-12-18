@@ -17,6 +17,7 @@
         "img": "/BikeBrandLogoImages/Hoonda.png",
         "models": ["Shine", "SP 125", "Unicorn", "Hornet 2.0", "Hness CB350"]
       },
+
       {
         "name": "TVS",
         "img": "/BikeBrandLogoImages/TVS.jpeg",
@@ -60,6 +61,8 @@
           "Himalayan 450"
         ]
       },
+  
+
       {
         "name": "KTM",
         "img": "/BikeBrandLogoImages/KTM.png",
@@ -131,6 +134,8 @@
         "models": ["S1 Air", "S1 Pro", "S1X"]
       }
     ],
+
+
     "years": [
       "2010",
       "2011",
@@ -149,7 +154,9 @@
       "2024",
       "2025"
     ],
+
     "fuels": ["Petrol", "Electric"],
+    
     "SellPeriod": [
       "Immediately",
       "Within a month",

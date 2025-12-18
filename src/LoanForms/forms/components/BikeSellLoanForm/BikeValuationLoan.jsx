@@ -12,7 +12,7 @@ const BikeValuationLoan = () => {
   const [direction, setDirection] = useState(1);
   const [InputResult, setInputResult] = useState("");
   const [submitLoader, setSubmitLoader] = useState(false);
-const[Mobile,setMobile]=useState("")
+  const [Mobile, setMobile] = useState("");
 
   // Selected Data
   // const [selectedBrand, setSelectedBrand] = useState("");
@@ -30,7 +30,7 @@ const[Mobile,setMobile]=useState("")
     fuel: "",
     location: "",
     sellTime: "",
-   Mobile:""
+    Mobile: "",
   });
 
   // ✅ Unified search inputs
@@ -39,8 +39,6 @@ const[Mobile,setMobile]=useState("")
     model: "",
     location: "",
   });
-
- 
 
   const navigate = useNavigate();
 
@@ -90,7 +88,7 @@ const[Mobile,setMobile]=useState("")
 
     if (isFinal) {
       resetAllFields(); // Reset all states
-     
+
       return; // Stop here
     }
 
@@ -107,7 +105,7 @@ const[Mobile,setMobile]=useState("")
       sellTime: "",
       Mobile: "",
     });
-setMobile("");
+    setMobile("");
     setSearch({ brand: "", model: "", location: "" });
   };
 
@@ -177,60 +175,60 @@ setMobile("");
   );
 
   const onSubmit = async (e) => {
+    e.preventDefault();
+
+    if (submitLoader) return;
+
     try {
-       updateAndNext("Mobile", Mobile, true);
-         setSubmitLoader(true);
+      // step state preserve
+      updateAndNext("Mobile", Mobile, true);
+      setSubmitLoader(true);
 
-
-         setTimeout(() => {
-      setSubmitLoader(false)
-      navigate("/successPage")
-    },1000);
-
-      e.preventDefault();
-
+      // 🧾 payload data (same as earlier logic)
       const payloadData = {
-        brand: selected.brand,
-        model: selected.model,
-        year: selected.year,
-        fuel: selected.fuel,
-        location: selected.location,
-        sellTime: selected.sellTime,
-        mobile: selected.Mobile,
+        brand: selected.brand || "",
+        model: selected.model || "",
+        year: selected.year || "",
+        fuel: selected.fuel || "",
+        location: selected.location || "",
+        sellTime: selected.sellTime || "",
+      mobile: Mobile || "",  
       };
 
-      console.log("Sending: ", payloadData);
-
+      // 📤 Google Sheet payload
       const payload = {
-        secret_token: "cc-ASJFSNFRGF",
-        data_list: [
-          {
-            source_name: "api_post_method",
-            json_data: payloadData,
-            bucket_is: "ach.zippycash.online",
-            active: true,
-            status: "on_submit",
-            remark: "-",
-          },
-        ],
+        formType: "BikeSellValuation", // 👈 tab name in sheet
+        source_name: "bike_sell_form",
+        loan_type: "bikesell_loan",
+        status: "final_submit",
+        active: true,
+
+        json_data: payloadData,
       };
 
-      const res = await fetch(
-        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbzoNDDbhxWUpDxX_WrqBMFT8xGDk_IgZNcCHkuuBVEjoppgkmI9Md_L_MzC0q_E3O-x_g/exec",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken":
-              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
-          },
           body: JSON.stringify(payload),
         }
       );
 
-    
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (!result || result.success !== true) {
+        throw new Error(result?.error || "Submission failed");
+      }
+
+      // ✅ success page ONLY after final submit
+      navigate("/successPage");
     } catch (error) {
-      console.log("Error ", error);
+      console.error("Submit Error:", error);
+      toast.error(error?.message || "Submission failed. Please try again.");
     } finally {
       setSubmitLoader(false);
     }
@@ -524,7 +522,7 @@ setMobile("");
                   {sellBikeData?.fuels?.map((fuels, i) => (
                     <div
                       key={i}
-                      onClick={() => updateAndNext("fuels", fuels)}
+                      onClick={() => updateAndNext("fuel", fuels)}
                       className={`flex items-center justify-center px-3 py-6 sm:px-5 sm:py-10 bg-gray-100 border border-gray-300 shadow-md ${
                         selected.fuel === fuels
                           ? "border-green-500 shadow-md"
@@ -612,18 +610,18 @@ setMobile("");
                   When do you want to sell your car?
                 </h2>
                 <div className="grid grid-cols-1 gap-4 mt-2">
-                  {sellBikeData?.SellPeriod?.map((sellperiod, i) => (
+                  {sellBikeData?.SellPeriod?.map((sellTime, i) => (
                     <div
                       key={i}
-                      onClick={() => updateAndNext("sellperiod", sellperiod)}
+                      onClick={() => updateAndNext("sellTime",sellTime)}
                       className={`flex items-center justify-center w-full py-4 sm:py-5 bg-gray-100 border ${
-                        selected.sellTime === sellperiod
+                        selected.SellPeriod === sellTime
                           ? "border-green-500 shadow-md"
                           : "border-gray-300"
                       } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}
                     >
                       <span className="text-gray-800 font-medium text-[13px] sm:text-sm text-center px-2">
-                        {sellperiod}
+                        {sellTime}
                       </span>
                     </div>
                   ))}

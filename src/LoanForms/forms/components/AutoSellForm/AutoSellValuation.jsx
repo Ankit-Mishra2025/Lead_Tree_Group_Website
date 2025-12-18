@@ -25,10 +25,6 @@ const AutoSellValuation = () => {
     Mobile: "",
   });
 
-
-  
-
-
   // ✅ Unified search inputs
   const [search, setSearch] = useState({
     brand: "",
@@ -86,28 +82,28 @@ const AutoSellValuation = () => {
     setDirection(1);
 
     if (isFinal) {
-      resetAllFields(); // Reset all states
-       // Back to first step
+      // resetAllFields(); // Reset all states
+      // Back to first step
       return; // Stop here
     }
 
     setStep((prev) => prev + 1);
   };
 
-  const resetAllFields = () => {
-    setSelected({
-      brand: "",
-      model: "",
-      year: "",
-      fuel: "",
-      location: "",
-      sellTime: "",
-      Mobile: "",
-    });
+  // const resetAllFields = () => {
+  //   setSelected({
+  //     brand: "",
+  //     model: "",
+  //     year: "",
+  //     fuel: "",
+  //     location: "",
+  //     sellTime: "",
+  //     Mobile: "",
+  //   });
 
-    setMobile("");
-    setSearch({ brand: "", model: "", location: "" });
-  };
+  //   setMobile("");
+  //   setSearch({ brand: "", model: "", location: "" });
+  // };
 
   const savePartialData = async (data) => {
     console.log("Saving partial:", data); // ⭐ console pe full data
@@ -118,7 +114,7 @@ const AutoSellValuation = () => {
         {
           source_name: "api_partial_save",
           json_data: {
-            loan_type: "personal_loan",
+            loan_type: "autoSell_loan",
             ...data,
           },
         },
@@ -147,6 +143,7 @@ const AutoSellValuation = () => {
     }
   };
 
+
   // ✅ Handlers (memoized)
   const handleNext = useCallback(() => {
     savePartialData(selected);
@@ -159,67 +156,73 @@ const AutoSellValuation = () => {
     setStep((prev) => (prev > 1 ? prev - 1 : prev));
   }, []);
 
+
   const handleInputSubmit = useCallback(
     (e) => {
       e.preventDefault();
       console.log("Input Registration is", InputResult);
       toast.success("Your Query is loaded");
-      
     },
     [InputResult, navigate]
   );
 
+
+
   const onSubmit = async (e) => {
+    e.preventDefault();
+
+    if (submitLoader) return;
+
     try {
+      // step state preserve
       updateAndNext("Mobile", Mobile, true);
       setSubmitLoader(true);
 
-      setTimeout(() => {
-      setSubmitLoader(false)
-      navigate("/successPage")
-    },1000);
-      e.preventDefault();
-
+      // 🧾 payload data (same as earlier logic)
       const payloadData = {
-        brand: selected.brand,
-        model: selected.model,
-        year: selected.year,
-        fuel: selected.fuel,
-        location: selected.location,
-        sellTime: selected.sellTime,
-        Mobile: selected.Mobile,
+        brand: selected.brand || "",
+        model: selected.model || "",
+        year: selected.year || "",
+        fuel: selected.fuel || "",
+        location: selected.location || "",
+        sellTime: selected.sellTime || "",
+         mobile: Mobile || "",
       };
 
+      // 📤 Google Sheet payload
       const payload = {
-        secret_token: "cc-ASJFSNFRGF",
-        data_list: [
-          {
-            source_name: "api_post_method",
-            json_data: payloadData,
-            bucket_is: "ach.zippycash.online",
-            active: true,
-            status: "on_submit",
-            remark: "-",
-          },
-        ],
+        formType: "AutoSellValuation", // 👈 tab name in sheet
+        source_name: "auto_sell_form",
+        loan_type: "autoSell_loan",
+        status: "final_submit",
+        active: true,
+
+        json_data: payloadData,
       };
 
-      const res = await fetch(
-        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbzGpel1KxLmPXe4ireROcsdRqhvSqYYpDd-7HI-NYJljZpyzXdSJ9H21IGV-xRaCSbz/exec",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken":
-              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
-          },
           body: JSON.stringify(payload),
         }
       );
 
-    
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (!result || result.success !== true) {
+        throw new Error(result?.error || "Submission failed");
+      }
+
+      // ✅ success page ONLY after final submit
+      navigate("/successPage");
     } catch (error) {
-      console.log("Error ", error);
+      console.error("Submit Error:", error);
+      toast.error(error?.message || "Submission failed. Please try again.");
     } finally {
       setSubmitLoader(false);
     }
@@ -351,7 +354,7 @@ const AutoSellValuation = () => {
         <div className="relative w-full min-h-[360px]">
           <AnimatePresence custom={direction} mode="wait">
             {/* Step 1 */}
-            
+
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -412,9 +415,6 @@ const AutoSellValuation = () => {
                 </div>
               </motion.div>
             )}
-
-
-
 
             {/* Step 2 - Model */}
             {step === 2 && (
@@ -620,7 +620,7 @@ const AutoSellValuation = () => {
                       key={i}
                       onClick={() => updateAndNext("sellTime", sellperiod)}
                       className={`flex items-center justify-center w-full py-4 sm:py-5 bg-gray-100 border ${
-                        selected.sellTime === sellperiod
+                        selected.SellPeriod === sellperiod
                           ? "border-green-500 shadow-md"
                           : "border-gray-300"
                       } rounded-lg shadow-sm hover:shadow-md hover:border-green-400 cursor-pointer transition-all duration-200`}

@@ -23,12 +23,11 @@ import { differenceInYears } from "date-fns";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function HomeLoan() {
   const [steps, setSteps] = useState<any[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-const[submitLoader,setSubmitLoader]=useState<boolean>(false)
+  const [submitLoader, setSubmitLoader] = useState<boolean>(false);
 
   // --- Load defaultValues from localStorage ---
   const storedData =
@@ -60,7 +59,7 @@ const[submitLoader,setSubmitLoader]=useState<boolean>(false)
     handleSubmit,
     trigger,
     watch,
-     formState: { errors },
+    formState: { errors },
   } = useForm<HomeLoanSchemaType>({
     resolver: zodResolver(homeLoanSchema),
     mode: "onTouched",
@@ -103,89 +102,92 @@ const[submitLoader,setSubmitLoader]=useState<boolean>(false)
     };
   }, []);
 
-  const savePartialData = async (data:any) => {
-  console.log("Saving partial:", data);  // ⭐ console pe full data
-  
-  const payload = {
-    secret_token: "cc-ASJFSNFRGF",
-    data_list: [
-      {
-        source_name: "api_partial_save",
-        json_data: {
-          loan_type: "personal_loan",
-          ...data
-        }
-      }
-    ]
-  };
-
-  try {
-    const response = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
-      method: "POST",
-      headers: {"Content-Type": "application/json",
-        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"},
-      body: JSON.stringify(payload)
-    });
-
-    const result = await response.json();
-    console.log("Partial Save Response:", result);
-    console.log("Payload Sent:", payload);
-
-  } catch (e) {
-    console.log("Partial save failed", e);
-  }
-};
-
-const navigate=useNavigate()
-
-const onSubmit = async (data:any) => {
-  try {
-    setSubmitLoader(true)
-
-setTimeout(() => {
-      setSubmitLoader(false)
-      navigate("/successPage")
-    },1000);
-
+  const savePartialData = async (data: any) => {
+    console.log("Saving partial:", data); // ⭐ console pe full data
 
     const payload = {
       secret_token: "cc-ASJFSNFRGF",
       data_list: [
         {
-          source_name: "api_post_method",
+          source_name: "api_partial_save",
           json_data: {
-            loan_type: "home_loan",
-            ...data
+            loan_type: "personal_loan",
+            ...data,
           },
-          bucket_is: "ach.zippycash.online",
-          active: true,
-          status: "on_submit",
-          remark: "-"
-        }
-      ]
+        },
+      ],
     };
 
-    const res = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"
-      },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch(
+        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
-    const result = await res.json();  
-    console.log("API Response ", result);
+      const result = await response.json();
+      console.log("Partial Save Response:", result);
+      console.log("Payload Sent:", payload);
+    } catch (e) {
+      console.log("Partial save failed", e);
+    }
+  };
 
-   
+  const navigate = useNavigate();
 
-  } catch (error) {
-    console.error(error);
-    toast.error("API Failed");
-  }finally{
-    setSubmitLoader(false)
-  }
-};
+  const onSubmit = async (data: any) => {
+    if (submitLoader) return;
+
+    try {
+      setSubmitLoader(true);
+
+      const payload = {
+        formType: "HomeLoan",
+        source_name: "api_post_method",
+        loan_type: "home_loan",
+        bucket_is: "ach.zippycash.online",
+        active: true,
+        status: "on_submit",
+        remark: "-",
+
+        json_data: {
+          ...data,
+          creditScore: data.creditScore?.value || data.creditScore || "",
+        },
+      };
+
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbx9itRP647YupPfHX8tKT_7F74Athjy1VZhPzdc_2srG_vFHF_lQPfp8ppugJVOERURQA/exec",
+        {
+          method: "POST",
+
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+      const result = await response.json();
+
+      if (!result || result.success !== true) {
+        throw new Error(result?.error || "Submission failed");
+      }
+
+      navigate("/successPage");
+    } catch (error: any) {
+      console.error("Submit Error:", error);
+      toast.error(error?.message || "Submission failed. Please try again.");
+    } finally {
+      setSubmitLoader(false);
+    }
+  };
 
   const onError = () => {
     toast.error("❌ Please fill all required fields correctly!");
@@ -203,13 +205,13 @@ setTimeout(() => {
       // Show inline error messages only, no toaster
       return;
     }
-savePartialData(allValues);
+    savePartialData(allValues);
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
- const inputClass = `
+  const inputClass = `
   w-full                    /* full width on all screens */
   max-w-[490px]            /* limit width on mobile */
   sm:max-w-[420px]         /* small screens */
@@ -236,7 +238,7 @@ savePartialData(allValues);
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6">
-             <label className="text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full">
+            <label className="text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full">
               {field.label}
             </label>
 
@@ -252,7 +254,7 @@ savePartialData(allValues);
                 />
               )}
             />
-           {(errors as any)[name] && (
+            {(errors as any)[name] && (
               <span className="text-red-500 text-sm md:text-base mt-1 text-center">
                 {(errors as any)[name]?.message}
               </span>
@@ -400,7 +402,6 @@ savePartialData(allValues);
               {field.label}
             </label>
 
-
             <Controller
               name={name}
               control={control}
@@ -440,8 +441,6 @@ savePartialData(allValues);
             />
           </div>
         );
-
-      
 
       case "select":
         return (
@@ -636,15 +635,14 @@ savePartialData(allValues);
                 transition ease-in-out duration-200 
                 cursor-pointer"
               >
-
-                {
-                  submitLoader?(
-                    <div className="flex items-center justify-center gap-2"><Loader2 className="animate-spin h-5 w-5"/>Submitting.</div>
-                  ):(
-                    "Register"
-                  )
-                }
-                
+                {submitLoader ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <Loader2 className="animate-spin h-5 w-5" />
+                    Submitting.
+                  </div>
+                ) : (
+                  "Register"
+                )}
               </button>
             )}
           </form>
