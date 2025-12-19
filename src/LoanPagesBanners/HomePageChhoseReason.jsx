@@ -8,11 +8,14 @@ const HomePageChhoseReason = () => {
 
   const itemsPerPage = 4; // ek baar me kitne card dikhane hai
 
+
   const nextPage = () => {
     if (index + itemsPerPage < SilderData.length) {
       setIndex(index + 1); // ek-ek slide move hoga
     }
   };
+
+
 
   const prevPage = () => {
     if (index > 0) {
@@ -20,10 +23,12 @@ const HomePageChhoseReason = () => {
     }
   };
 
+
+
   return (
     <div className="flex w-full p-5 min-h-[400px] flex-col mt-5">
       <h2 className="text-[35px] text-center font-semibold">
-        Why should you choose <span>Lead tree</span>?
+        Why Should you choose <span>Lead tree</span>?
       </h2>
 
       <div className="flex items-center w-full gap-3 mt-10 overflow-hidden">
@@ -35,6 +40,9 @@ const HomePageChhoseReason = () => {
         >
           <ChevronLeft size={"25px"} />
         </button>
+
+
+
 
         {/* SLIDER */}
         <div className="overflow-hidden w-full">

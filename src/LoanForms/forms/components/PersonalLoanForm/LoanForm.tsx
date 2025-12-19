@@ -194,6 +194,7 @@ export default function PersonalLoanForm() {
     toast.error("❌ Please fill all required fields correctly!");
   };
 
+
   const nextStep = async () => {
     const currentFields = steps
       .filter((_, idx) => idx === currentStep)
