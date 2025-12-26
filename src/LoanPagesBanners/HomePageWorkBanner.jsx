@@ -1,8 +1,47 @@
-import { AddHome, AutoAwesome, HomeFilled, HomeMax, HomeMiniTwoTone, HomeRepairService, Money, Umbrella } from "@mui/icons-material";
-import { Calculator, Car, DollarSignIcon, Home, UmbrellaIcon, Wallet, Wallet2 } from "lucide-react";
+import {
+  AddHome,
+  AutoAwesome,
+  HomeFilled,
+  HomeMax,
+  HomeMiniTwoTone,
+  HomeRepairService,
+  Money,
+  Umbrella,
+} from "@mui/icons-material";
+import {
+  Calculator,
+  Car,
+  DollarSignIcon,
+  Home,
+  UmbrellaIcon,
+  Wallet,
+  Wallet2,
+} from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import { navigateToLoanForm } from "../Utils/navigationHelpers.js";
+
+
 
 const HomePageWorkBanner = () => {
+
+  const navigate = useNavigate();
+
+const handlePerosonalLoan = () => {
+  navigateToLoanForm(navigate, "personalLoan"); // ✅ fixed param
+};
+
+const handleHomeLoanCompareRates = () => {
+    navigateToLoanForm(navigate, "homeLoan"); // ✅ fixed param
+  };
+
+
+   const  handleCreditCardRates = () => {
+       navigateToLoanForm(navigate, "creditCard"); // ✅ fixed param
+     };
+
+
   return (
     <div className="w-full bg-gray-200 min-h-screen  justify-between flex mt-2">
       <div className="w-full  flex justify-around ">
@@ -16,100 +55,93 @@ const HomePageWorkBanner = () => {
             Americans for more than 20 years. Our marketplace is the largest in
             the country, and it's filled with lenders you know and trust.
           </p>
-
+        
           <div className="left_1_Links grid grid-cols-2 mt-20 gap-10">
             <ul className="flex flex-col gap-6">
-              <a href="#">
- <li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500 " >
-                  <Home size={"32px"} />{" "}
-                </span>
-                Mortage Refinance{" "}
-              </li>
-              </a>
-             
+              <button className=" cursor-pointer ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500 ">
+                    <Home size={"32px"} />{" "}
+                  </span>
+                  Mortage Refinance{" "}
+                </li>
+              </button>
 
-             <a href="#">
- <li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500 ">
-                  <AddHome  size={"35px"}  />{" "}
-                </span>
-                Home Equity Loans{" "}
-              </li>
-             </a>
-             
+              <button onClick={handleHomeLoanCompareRates} className=" cursor-pointer ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500 ">
+                    <AddHome size={"35px"} />{" "}
+                  </span>
+                  Home Equity Loans{" "}
+                </li>
+              </button>
+            
+              <button onClick={handleCreditCardRates} className=" cursor-pointer  ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500">
+                    <Wallet size={"32px"} />{" "}
+                  </span>
+                  Credit Cards{" "}
+                </li>
+              </button>
+            
+            
+            
 
-             <a href="#">
- <li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500">
-                  <Wallet  size={"32px"} />{" "}
-                </span>
-                Credit Cards{" "}
-              </li>
-             </a>
-             
-
-             <a href="#">
-<li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500">
-                  <Calculator size={"32px"} />{" "}
-                </span>
-                Mortage Calculator{" "}
-              </li>
-             </a>
-              
+              <button className=" cursor-pointer  ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500">
+                    <Calculator size={"32px"} />{" "}
+                  </span>
+                  Mortage Calculator{" "}
+                </li>
+              </button>
             </ul>
 
             <ul className="flex flex-col gap-6">
+              <button onClick={handlePerosonalLoan} className=" cursor-pointer  ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500 ">
+                    <DollarSignIcon size={"32px"} />{" "}
+                  </span>
+                  Personal Loan{" "}
+                </li>
+              </button>
 
-              <a href="#">
-<li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500 " >
-                  <DollarSignIcon size={"32px"} />{" "}
-                </span>
-                Personal Loan{" "}
-              </li>
-              </a>
-               
-<a href="#">
-<li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500 " >
-                  <Car   size={"32px"} />{" "}
-                </span>
-              Auto Loan{" "}
-              </li>
-</a>
+              <button className=" cursor-pointer  ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500 ">
+                    <Car size={"32px"} />{" "}
+                  </span>
+                  Auto Loan{" "}
+                </li>
+              </button>
 
+              <button className=" cursor-pointer ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500 ">
+                    <Wallet2 size={"32px"} />{" "}
+                  </span>
+                  Free Credit score{" "}
+                </li>
+              </button>
 
-<a href="#">
-<li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500 " >
-                  <Wallet2  size={"32px"} />{" "}
-                </span>
-              Free Credit score{" "}
-              </li>
-</a>
-
-
-<a href="#">
-<li className="flex gap-4 text-[18px] text-gray-600 hover:text-blue-900">
-                {" "}
-                <span className="text-emerald-500 " >
-                  <UmbrellaIcon  size={"32px"} />{" "}
-                </span>
-              Insurance{" "}
-              </li>
-</a>
-
-
-
+              <button className=" cursor-pointer  ">
+                <li className="flex gap-4 text-[18px] text-gray-600 hover:text-green-700">
+                  {" "}
+                  <span className="text-emerald-500 ">
+                    <UmbrellaIcon size={"32px"} />{" "}
+                  </span>
+                  Insurance{" "}
+                </li>
+              </button>
             </ul>
           </div>
         </div>
@@ -126,3 +158,4 @@ const HomePageWorkBanner = () => {
 };
 
 export default HomePageWorkBanner;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

@@ -427,6 +427,8 @@ const handlePersonalNext = handleSubmit((data) => {
     }
   };
 
+
+
   // ✅ Handlers for selections and searches (memoized)
   const handleSelect = useCallback((key, value) => {
     setSelected((prev) => ({ ...prev, [key]: value }));
@@ -1176,7 +1178,7 @@ const handlePersonalNext = handleSubmit((data) => {
 
     <div
       
-      className="w-full grid grid-cols-2 gap-3 mt-2"
+      className="w-full grid grid-cols-2 gap-3 mt-8"
     >
       {PersonalData.map((infoData) => (
         <div key={infoData.id} className="w-full">
@@ -1208,13 +1210,16 @@ const handlePersonalNext = handleSubmit((data) => {
       ))}
 
       {/* Hidden submit button (validation ke liye) */}
-      <button
+     <div className=" p-5 flex justify-center items-center">
+ <button
   type="button"
   onClick={handlePersonalNext}
-  className="px-5 py-3 font-semibold cursor-pointer bg-green-500 text-white rounded-lg"
+  className="w-40 py-3 font-semibold cursor-pointer bg-green-500 text-white rounded-lg hover:bg-green-600 hover:translate-x-1 transition-all duration-300"
 >
   Continue
 </button>
+      </div>
+     
       
     </div>
 
@@ -1270,6 +1275,7 @@ const handlePersonalNext = handleSubmit((data) => {
                     </button>
                   </div>
                 </div>
+                
                 <p className="text-xs font-semibold text-gray-600 mb-4">
                   Don't worry we will not span you. :)
                 </p>

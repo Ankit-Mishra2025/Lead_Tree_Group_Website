@@ -296,7 +296,7 @@ export default function PersonalLoanForm() {
                   {...rhfField}
                   placeholder="Enter 10-digit phone number"
                   maxLength={10}
-                  className={`w-[250px] md:w-full mt-5 border rounded-xl px-3 py-3 sm:px-3 sm:py-3 text-[15px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200 transition-all ${
+                  className={` md:w-full mt-5 border rounded-xl px-3 py-3 sm:px-3 sm:py-3 text-[15px] sm:text-[16px] md:text-[16px]  text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200 transition-all ${
                     errors[name]
                       ? "border-red-500 text-red-600 text-base focus:ring-red-400"
                       : "border-gray-300 focus:border-blue-500"
@@ -640,7 +640,7 @@ export default function PersonalLoanForm() {
         />
 
         {/* Form Container */}
-        <div className="w-full max-w-xl  p-6 md:p-8 rounded-lg  z-10">
+        <div className="w-full  max-w-xl p-6 md:p-8 rounded-lg  z-10 items-center justify-center ">
           {/* Progress Bar */}
           <div className="w-full h-1 mb-6 bg-gray-300 rounded-full">
             <div
@@ -651,7 +651,7 @@ export default function PersonalLoanForm() {
 
           {/* Step Form */}
           <form onSubmit={handleSubmit(onSubmit, onError)} className="mt-5">
-            <div className="flex justify-center items-center mb-5">
+            <div className="flex justify-center items-center mb-5 ">
               <h1 className="text-[16px] text-green-800">PERSONAL LOAN</h1>
             </div>
 

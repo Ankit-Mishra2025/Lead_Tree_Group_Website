@@ -664,7 +664,7 @@ savePartialData(allValues)
                 rounded-lg 
                 mt-3 
                 transition ease-in-out duration-200 
-                cursor-pointer"
+                cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                  {
                   submitLoader?(

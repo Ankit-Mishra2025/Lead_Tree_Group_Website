@@ -4,7 +4,7 @@ const HomePageTrust = () => {
   return (
     <div className="w-full min-h-screen flex p-10 flex-col">
       <h2 className="text-center font-semibold text-[35px]">
-        Why Millions of trust us?
+        Why <span className="text-green-600 font-semibold"> Millions</span>   of trust us?
       </h2>
 
       <div className="w-full flex items-center justify-around mt-5 ">

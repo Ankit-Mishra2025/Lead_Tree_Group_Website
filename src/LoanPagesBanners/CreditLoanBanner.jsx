@@ -28,7 +28,7 @@ const navigate = useNavigate();
             From earning rewards to transferring a balance, find the right
             credit card to help you score everyday wins.
           </p>
-          <button className="mt-4  w-60 px-5 py-4 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-500" onClick={handleCompareRates}>
+          <button className="mt-4  w-60 px-5 py-4 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300" onClick={handleCompareRates}>
             Compare Credit Cards
           </button>
           <p className=" relative top-20 flex gap-1 items-center w-full text-[12px] text-gray-400 px-2">

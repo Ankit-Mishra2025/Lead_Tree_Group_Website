@@ -27,7 +27,7 @@ const BusinessLoanBanner = () => {
             </p>
             <div className="flex items-center gap-5">
               <button
-                className="mt-4 ml-2 w-60 px-6 py-4 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer"
+                className="mt-4 ml-2 w-60 px-6 py-4 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300"
                 onClick={handleCompareRates}
               >
                 Compare Business Loan

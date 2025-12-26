@@ -633,7 +633,9 @@ export default function HomeLoan() {
                 rounded-lg 
                 mt-9
                 transition ease-in-out duration-200 
-                cursor-pointer"
+                cursor-pointer
+                 disabled:opacity-70 disabled:cursor-not-allowed
+                "
               >
                 {submitLoader ? (
                   <div className="flex items-center justify-center gap-2">

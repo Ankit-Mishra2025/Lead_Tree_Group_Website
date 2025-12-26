@@ -13,6 +13,8 @@ import {
   House,
   HouseHeartIcon,
   CarFront,
+  Search,
+  Send,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -118,14 +120,125 @@ const HomeCarousel = () => {
   return (
     <>
       {/* ✅ Heading */}
-      <div className="text-center mt-12 mb-8 py-5">
-        <h2 className="font-bold text-[40px] text-gray-800 mt-5">
-          When banks compete, <span className="text-green-600">you win.</span>
+      <div className="" >
+<div className="text-center mt-4 py-5 flex items-center justify-center flex-col  ">
+        <h2 className="font-primary text-[40px] text-gray-800 mt-5">
+          When Banks Compete, <span className="text-[#188234]">You Win.</span>
         </h2>
+        <h4 className="w-[500px] text-[#8D929A] mt-2 ">
+          Compare personalised loan offers from multiple lenders in minutes.
+          Find the best rates on home loans, car loans, personal loans, and
+          more.
+        </h4>
       </div>
 
+     <div className="flex items-center w-full justify-center font-semibold gap-4">
+  <button className="bg-[#188234] px-4 py-2 rounded-4xl text-[#FCFCFC] cursor-pointer">
+    Compare Loan Options
+  </button>
+  <button className="bg-[#FCFCFC] px-4 py-2 rounded-4xl text-[#8D929A] cursor-pointer shadow-md">
+    How it Works
+  </button>
+</div>
+
+
+<div className="flex items-center w-full justify-center mt-8 ">
+  <motion.div
+    className="relative w-xl rounded-full p-0.5"
+    animate={{
+      backgroundPosition: ["0% 25%", "200% 50%"],
+    }}
+    transition={{
+      duration: 3,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+    style={{
+      background: `
+        linear-gradient(
+          300deg,
+          #4ade80 25%,
+           #4ade80 55%,
+          #4ade80 45%,
+          #16a34a 90%,
+          green 30%
+        )
+      `,
+      backgroundSize: "200% 300%",
+    }}
+  >
+    <div className="relative rounded-full bg-white px-2">
+      <Search
+        className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
+        size={18}
+      />
+    <Send className="text-green-500 absolute right-5 top-1/2 -translate-y-1/2 cursor-pointer" size={23}/>
+      <input
+        type="text"
+        placeholder="Ask Anything..."
+        className="w-full px-10 py-2 rounded-full bg-white focus:outline-none"
+      />
+        
+    </div>
+  </motion.div>
+
+</div>
+
+
+
+
+<div className=" w-full mt-15 flex items-center  justify-center  ">
+
+<div className="bg-[#1882340F] flex items-cente justify-center ml-5  py-3 w-3xl border-1 border-[#188234] rounded-full gap-7 ">
+<div className="flex flex-col items-center  justify-center">
+  <h2 className="font-semibold text-[#188234]">350+</h2>
+<p className="text-[14px] font-semibold">Trusted Lenders</p>
+</div>
+
+<div className="flex items-center justify-center">
+  <div className="w-[2px] h-13 bg-green-600 ml-3"></div>
+</div>
+
+<div className="flex flex-col items-center px-2 justify-center">
+  <h2 className="font-semibold text-[#188234]">100M+</h2>
+<p className="text-[14px] font-semibold">User Helped</p>
+</div>
+
+<div className="flex items-center justify-center">
+  <div className="w-[2px] h-13 bg-green-600 ml-3"></div>
+</div>
+
+
+<div className="flex flex-col items-center px-2 justify-center">
+  <h2 className="font-semibold text-[#188234]">$35B+</h2>
+<p className="text-[14px] font-semibold">Loans Matched</p>
+</div>
+
+<div className="flex items-center justify-center">
+  <div className="w-[2px] h-13 bg-green-600 ml-3"></div>
+</div>
+
+<div className="flex flex-col items-center px-2 justify-center">
+  <h2 className="font-semibold text-[#188234]">4.8</h2>
+<p className="text-[14px] font-semibold">Average Rating</p>
+</div>
+
+
+
+<div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
       {/* ✅ Carousel Section */}
-      <div className="relative  max-w-6xl mx-auto bg-white shadow-sm rounded-md  overflow-hidden py-1">
+      <div className="relative  mt-30  max-w-6xl mx-auto bg-white shadow-sm rounded-md  overflow-hidden py-1">
         {/* Previous Button */}
         {page > 0 && (
           <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center space-y-1">
@@ -133,7 +246,10 @@ const HomeCarousel = () => {
               onClick={prevPage}
               className="bg-white shadow-lg p-3 rounded-md hover:bg-green-50 border border-gray-200 flex items-center justify-center cursor-pointer"
             >
-              <ChevronLeft size={25} className="text-green-800" />
+              <ChevronLeft
+                size={25}
+                className="text-green-800  hover:-translate-x-1 transition-all duration-300 "
+              />
             </button>
             <span className="text-[13px] font-medium text-blue-600">
               Previous
@@ -194,7 +310,10 @@ const HomeCarousel = () => {
               onClick={nextPage}
               className="bg-white shadow-lg p-3 rounded-md hover:bg-green-50 border border-gray-200 flex items-center justify-center cursor-pointer"
             >
-              <ChevronRight size={25} className="text-green-800" />
+              <ChevronRight
+                size={25}
+                className="text-green-800 hover:translate-x-1 transition-all duration-100"
+              />
             </button>
             <span className="text-[13px] font-medium text-blue-600">
               More Options
@@ -217,6 +336,8 @@ const HomeCarousel = () => {
           </motion.div>
         </AnimatePresence>
       </div>
+      </div>
+      
     </>
   );
 };

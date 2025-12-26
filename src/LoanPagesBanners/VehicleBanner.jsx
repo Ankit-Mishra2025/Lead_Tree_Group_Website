@@ -32,7 +32,7 @@ const VehicleBanner = () => {
             </p>
             <button
               onClick={handleCompareRates}
-              className="mt-4 ml-2 px-8 py-3 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 transition"
+              className="mt-4 ml-2 px-8 py-3 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300 "
             >
               Purchase
             </button>

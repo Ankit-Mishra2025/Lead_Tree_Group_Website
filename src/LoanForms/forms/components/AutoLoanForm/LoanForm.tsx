@@ -628,7 +628,7 @@ savePartialData(allValues)
                 </button>
               )}
             </div>
-
+           
             <div className="w-full flex items-center justify-center mt-15">
               {currentStep === steps.length - 1 && (
                 <button
@@ -639,8 +639,8 @@ savePartialData(allValues)
         text-[15px] sm:text-[17px] md:text-[19px]  /* Responsive font size */
          bg-green-600 hover:bg-green-700
         text-white rounded-lg transition ease-in-out duration-200
-        cursor-pointer
-      "
+        cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+      
                 >
                  {
                   submitLoader?(

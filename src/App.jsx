@@ -10,7 +10,7 @@ import Footer from "./Components/Footer";
 // import AutoSellValuation from "./LoanForms/forms/components/AutoSellForm/AutoSellValuation";
 // import BikeValuationLoan from "./LoanForms/forms/components/BikeSellLoanForm/BikeValuationLoan";
 import HomePageWorkBanner from "./LoanPagesBanners/HomePageWorkBanner";
-import HomePageChhoseReason from "./LoanPagesBanners/HomePageChhoseReason";
+import HomePageChhoseReason from "./LoanPagesBanners/HomeHowWorksPage";
 import HomePageTrust from "./LoanPagesBanners/HomePageTrust";
 import FinanceSlider from "./SliderData/FinanceSlider";
 import LoanTypesRouting from "./routingPages/LoanTypesRouting";
@@ -20,6 +20,7 @@ import CreditCardNavbar from "./Components/CreditCardNavbar";
 import AutoBuyForm from "./LoanForms/forms/components/AutoBuyForm/AutoBuyForm";
 import FilterBuyedCar from "./LoanForms/forms/components/AutoBuyForm/FilterBuyedCar";
 import SubmitNotificationPage from "./Components/SubmitNotificationPage";
+
 // import FinanceBlogPage from "./LoanPagesBanners/FinanceBlogPage";
 
 const MainLayout = () => (
@@ -62,6 +63,8 @@ const appRouter = createBrowserRouter([
     path:"/Buycar-browse/FilteredCard",
     element:<FilterBuyedCar/>
   },
+
+  
 
    {
     path:"/successPage",

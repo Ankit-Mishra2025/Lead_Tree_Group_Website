@@ -1,130 +1,157 @@
-import { Facebook, Instagram, YouTube } from "@mui/icons-material";
-import { Network } from "lucide-react";
+import { Facebook, Instagram, LinkedIn, Twitter, YouTube } from "@mui/icons-material";
+import { FacebookIcon, LinkedinIcon, Network } from "lucide-react";
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="w-full bg-blue-950 min-h-screen grid grid-cols-4 px-15 py-5">
-      <div className="flex flex-col">
-        <h2 className="text-[16px] text-white font-semibold">About Us</h2>
-        <ul className="mt-2 text-[13px] text-gray-200 flex flex-col gap-2">
-          <li>
-            <a href="#">About LeadTree</a>
+    <div className="w-full  min-h-[250px] flex p-10 bg-[#0E1828] ">
+
+      <div className="flex flex-col w-md ">
+        <h2 className="font-semibold text-[15px] md:text-[17px] text-white">
+          Lead <span className="text-green-700 font-semibold">Tree</span> Group
+        </h2>
+
+        <p className="text-white text-[12px] mt-3 font-semibold w-70">
+          Connecting you with the best loan options from trusted local vendors
+        </p>
+
+        
+
+        <div className="flex flex-col mt-8">
+          <h2 className="text-[16px] text-white font-medium">Follow us</h2>
+
+          <ul className="mt-2 text-[13px] text-slate-200 flex flex-row gap-2">
+            <li className="h-9 w-9 rounded-md shadow-2xl  bg-[#152641]  flex items-center justify-center hover:bg-red-700 transition-all duration-300 hover:-translate-y-1 ">
+              <a href="#">
+                <YouTube sx={{ fontSize: "30px" }} />
+              </a>
+            </li>
+
+
+            <li className="h-9 w-9 rounded-md shadow-2xl  bg-[#152641]  flex items-center justify-center hover:bg-blue-700 transition-all duration-300 hover:-translate-y-1 ">
+              <a href="#">
+        
+              <FacebookIcon />
+              </a>
+            </li>
+
+
+            <li className="h-9 w-9 rounded-md shadow-2xl  bg-[#152641]  flex items-center justify-center  hover:bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 transition-all duration-300 hover:-translate-y-1 ">
+              <a href="#">
+                <Instagram sx={{ fontSize: "30px" }} />
+              </a>
+            </li>
+           
+
+            <li className="h-9 w-9 rounded-md shadow-2xl  bg-[#152641]  flex items-center justify-center hover:bg-black transition-all duration-300 hover:-translate-y-1 ">
+              <a href="#">
+                <Twitter size={"30px"} />
+              </a>
+            </li>
+
+              <li className="h-9 w-9 rounded-md shadow-2xl  bg-[#152641]  flex items-center justify-center hover:bg-blue-500 transition-all duration-300 hover:-translate-y-1 ">
+              <a href="#">
+              <LinkedinIcon />
+              </a>
+            </li>
+          </ul>
+        </div>
+     </div>
+
+
+
+<div className="grid grid-cols-3  gap-10 px-5 w-[70%]">
+   
+<div className="flex flex-col">
+        <h2 className="text-[16px] md:text-[17px] text-white font-semibold">
+          Company
+        </h2>
+
+        <ul className=" mt-2 text-[13px] md:text-[15px] text-gray-200 flex flex-col gap-2">
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">About</a>
           </li>
 
-          <li>
-            <a href="#">Careers</a>
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">Mission</a>
+          </li>
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">Our Team</a>
           </li>
 
-          <li>
-            <a href="#">Contact us</a>
-          </li>
-          <li>
-            <a href="#">Investors</a>
-          </li>
-          <li>
-            <a href="#">Partner with Us</a>
-          </li>
+
+          
         </ul>
+
+        
       </div>
 
+
+
       <div className="flex flex-col">
-        <h2 className="text-[16px] text-white font-medium">Legal Information</h2>
+        <h2 className="text-[16px] md:text-[17px] text-white font-semibold">
+          Services
+        </h2>
 
-
-        <ul className=" mt-2 text-[13px] text-slate-200 flex flex-col gap-2">
- <li>
-            <a href="#">Overview</a>
+        <ul className="mt-2 text-[13px] md:text-[15px] text-gray-200 flex flex-col gap-2">
+          <li className="cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">Privacy</a>
+          </li>
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">Terms & Conditions</a>
           </li>
 
- <li>
-            <a href="#">Privacy Policy</a>
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">Disclaimer</a>
           </li>
- <li>
-            <a href="#">Terms of Use</a>
-          </li>
-
- <li>
-            <a href="#">Licenses & Disclosures</a>
-          </li>
-
-
- <li>
-            <a href="#">Unsubscribe</a>
-          </li>
- <li>
-            <a href="#">Accessibility Statement</a>
-          </li>
-
+          
         </ul>
-      </div>
 
 
-      <div className="flex flex-col">
- <h2 className="text-[16px] text-white font-medium">Other Sites</h2>
-
-<ul className="mt-2 text-[13px] text-slate-200 flex flex-col gap-2">
-    <li>
-            <a href="#">CompareCards</a>
-          </li>
- <li>
-            <a href="#">DepositAccounts</a>
-          </li>
-
-
- <li>
-            <a href="#">ValuePenguin</a>
-          </li>
-<li>
-    <a href="#">MagnifyMoney</a>
-</li>
-
-<li>
-    <a href="#">SnapCap</a>
-</li>
-
-</ul>
 
       </div>
 
 <div className="flex flex-col">
- <h2 className="text-[16px] text-white font-medium">Follow us</h2>
+        <h2 className="text-[16px] md:text-[17px] text-white font-semibold">
+          Contact us
+        </h2>
 
-<ul className="mt-2 text-[13px] text-slate-200 flex flex-row gap-2">
-    
-    <li className="h-12 w-12 rounded-full border border-white flex items-center justify-center "><a href="#"><YouTube sx={{fontSize:"40px"}}/></a></li>
+        <ul className="mt-2 text-[13px] md:text-[15px] text-gray-200 flex flex-col gap-2">
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">We@leadtree.com</a>
+          </li>
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-1">
+            <a href="#">012-345-6789</a>
+          </li>
+
+          <li className=" cursor-pointer hover:translate-x-2 hover:text-green-400 hover:font-bold 
+          transition-all duration-400 hover:underline underline-offset-2">
+            <a href="#">Betul | Gurugram</a>
+          </li>
+         
+        </ul>
 
 
-
- <li className="h-12 w-12 rounded-full border border-white flex items-center justify-center "><a href="#"><Facebook sx={{fontSize:"40px"}} /></a></li>
-
-
-<li className="h-12 w-12 rounded-full border border-white flex items-center justify-center "><a href="#"><Instagram sx={{fontSize:"40px"}} /></a></li>
-
-
-<li className="h-12 w-12 rounded-full border border-white flex items-center justify-center "><a href="#"><Network size={"20px"}/></a></li>
-
-
-</ul>
-
+       
       </div>
 
-
-
-<div className="flex px-10 py-5 w-xl">
-<p className="text-gray-400 text-[13px]" >
-
-LendingTree, LLC is a Marketing Lead Generator and is a Duly Licensed Mortgage Broker, as required by law, with its main office located at 1415 Vantage Park Drive, Suite 700, Charlotte, NC 28203 (TDD/TTY). NMLS Unique Identifier #1136. LendingTree, LLC is known as LT Technologies in lieu of true name LendingTree, LLC in NY. LendingTree technology and processes are patented under U.S. Patent Nos. 6,385,594 and 6,611,816 and licensed under U.S. Patent Nos. 5,995,947 and 5,758,328. © 2025 LendingTree, LLC. All Rights Reserved. This site is directed at, and made available to, persons in the continental U.S., Alaska and Hawaii only.
-
-
-
-</p>
 </div>
+ 
+      
 
-
-
+     
     </div>
+    
   );
 };
 
