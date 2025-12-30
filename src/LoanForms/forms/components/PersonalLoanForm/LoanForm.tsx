@@ -214,11 +214,7 @@ export default function PersonalLoanForm() {
   // **Green focus for all inputs & select**
   const inputClass = `
   w-full                    /* full width on all screens */
-  max-w-[490px]            /* limit width on mobile */
-  sm:max-w-[420px]         /* small screens */
-  md:max-w-[500px]         /* medium screens */
-  lg:max-w-[600px]         /* large screens */
-  xl:max-w-[700px]         /* extra large screens */
+
 
   mt-8   px-3 py-3 md:px-3 md:py-3 
   text-[17px] sm:text-[15px] md:text-[18px]
@@ -239,7 +235,7 @@ export default function PersonalLoanForm() {
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6">
-            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
+            <label className="mb-3 text-[28px] sm:text-[28px] md:text-4xl lg:text-5xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
               {field.label}
             </label>
             <Controller
