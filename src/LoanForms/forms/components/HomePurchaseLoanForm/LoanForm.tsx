@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { HomePurchase, HomePurchaseType } from "./schema";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-
 import {
   LocalizationProvider,
   DatePicker,
@@ -22,8 +21,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-
-
 import PhoneInput from "react-phone-input-2";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -32,15 +29,12 @@ import { differenceInYears } from "date-fns";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-
-
 export default function HomeLoan() {
   const [steps, setSteps] = useState<any[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
-const [submitLoader, setSubmitLoader] = useState<boolean>(false);
-
+  const [submitLoader, setSubmitLoader] = useState<boolean>(false);
 
   // --- Load defaultValues from localStorage ---
   const storedData =
@@ -118,43 +112,47 @@ const [submitLoader, setSubmitLoader] = useState<boolean>(false);
     };
   }, []);
 
-const savePartialData = async (data:any) => {
-  console.log("Saving partial:", data);  // ⭐ console pe full data
-  
-  const payload = {
-    secret_token: "cc-ASJFSNFRGF",
-    data_list: [
-      {
-        source_name: "api_partial_save",
-        json_data: {
-          loan_type: "personal_loan",
-          ...data
+  const savePartialData = async (data: any) => {
+    console.log("Saving partial:", data); // ⭐ console pe full data
+
+    const payload = {
+      secret_token: "cc-ASJFSNFRGF",
+      data_list: [
+        {
+          source_name: "api_partial_save",
+          json_data: {
+            loan_type: "personal_loan",
+            ...data,
+          },
+        },
+      ],
+    };
+
+    try {
+      const response = await fetch(
+        "https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr",
+          },
+          body: JSON.stringify(payload),
         }
-      }
-    ]
+      );
+
+      const result = await response.json();
+      console.log("Partial Save Response:", result);
+      console.log("Payload Sent:", payload);
+    } catch (e) {
+      console.log("Partial save failed", e);
+    }
   };
 
-  try {
-    const response = await fetch("https://ads.ads-astra.com/api/ndatalab_workspace/receiver-bucket1", {
-      method: "POST",
-      headers: {"Content-Type": "application/json",
-        "X-CSRFToken": "0SGf2FTPgeyUgPnYTYVc9anlbIQZGm7IxMpoojKCMfNlzykSuW93sk4yqD14TMPr"},
-      body: JSON.stringify(payload)
-    });
+  const navigate = useNavigate();
 
-    const result = await response.json();
-    console.log("Partial Save Response:", result);
-    console.log("Payload Sent:", payload);
-
-  } catch (e) {
-    console.log("Partial save failed", e);
-  }
-};
-
-
-const navigate=useNavigate()
-
- const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any) => {
     if (submitLoader) return;
 
     try {
@@ -217,32 +215,15 @@ const navigate=useNavigate()
       // Show inline error messages only, no toaster
       return;
     }
-savePartialData(allValues);
+    savePartialData(allValues);
 
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
-   const inputClass = `
-  w-full                    /* full width on all screens */
-  max-w-[490px]            /* limit width on mobile */
-  sm:max-w-[420px]         /* small screens */
-  md:max-w-[500px]         /* medium screens */
-  lg:max-w-[600px]         /* large screens */
-  xl:max-w-[700px]         /* extra large screens */
-
-  mt-8   px-3 py-3 md:px-3 md:py-3 
-  text-[15px] sm:text-[15px] md:text-[18px]
-
-  border rounded-lg
-  focus:outline-none 
-  focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200
-
-  transition-all duration-300 ease-in-out
-  hover:translate-y-1 hover:scale-103
-`;
-
+  const inputClass = `w-full mt-8   px-3 py-3 md:px-3 md:py-3 text-[16px] sm:text-[15px] md:text-[18px] border rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200
+transition-all duration-300 ease-in-out hover:translate-y-1 hover:scale-103`;
 
 
   const renderField = (field: any) => {
@@ -253,7 +234,7 @@ savePartialData(allValues);
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6">
-           <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
+            <label className="mb-3 text-[30px] sm:text-[35px] md:text-4xl xl:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
               {field.label}
             </label>
 
@@ -269,16 +250,13 @@ savePartialData(allValues);
                 />
               )}
             />
-             {(errors as any)[name] && (
+            {(errors as any)[name] && (
               <span className="text-red-500 text-sm md:text-base mt-1">
                 {(errors as any)[name]?.message}
               </span>
             )}
           </div>
         );
-
-
-
 
       case "phone":
         return (
@@ -330,8 +308,11 @@ savePartialData(allValues);
         );
       case "slider":
         return (
-          <div key={name} className="flex flex-col mb-6 items-center justify-center">
-             <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-[250px]  md:w-full ">
+          <div
+            key={name}
+            className="flex flex-col mb-6 items-center justify-center"
+          >
+            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-[250px]  md:w-full ">
               {field.label}
             </label>
             <Controller
@@ -364,7 +345,9 @@ savePartialData(allValues);
                     type="text"
                     readOnly
                     className={`${inputClass} mt-3 bg-gray-50`}
-                    value={`₹ ${((rhfField.value || 0) / 100000).toFixed(1)} Lakh`}
+                    value={`₹ ${((rhfField.value || 0) / 100000).toFixed(
+                      1
+                    )} Lakh`}
                   />
                 </>
               )}
@@ -372,101 +355,101 @@ savePartialData(allValues);
           </div>
         );
 
-
-
-    
       case "date":
-       return (
-                 <div key={name} className="flex flex-col mb-8">
-                   <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug">
-                     {field.label}
-                   </label>
-       
-                   <Controller
-                     name={name}
-                     control={control}
-                     defaultValue={
-                       defaultValues.dob ? new Date(defaultValues.dob) : null
-                     }
-                     rules={{
-                       required: "Choose your Date of Birth",
-                       validate: (value) => {
-                         if (!value) return "Choose your Date of Birth";
-       
-                         const dateValue =
-                           value instanceof Date ? value : new Date(value);
-                         if (isNaN(dateValue.getTime())) return "Invalid date";
-       
-                         const yearStr = dateValue.getFullYear().toString();
-                         // Must be 4 digits, max 3 zeros allowed, cannot start with zero
-                         if (!/^[1-9][0-9]{0,3}$/.test(yearStr))
-                           return "Please select a valid 4-digit year";
-       
-                         const age = differenceInYears(new Date(), dateValue);
-                         if (age < 18) return "You must be at least 18 years old";
-       
-                         return true;
-                       },
-                     }}
-                     render={({ field: rhfField, fieldState }) => (
-                       <LocalizationProvider dateAdapter={AdapterDateFns}>
-                         <DatePicker
-                           {...rhfField}
-                           disableFuture
-                           openTo="year"
-                           views={["year", "month", "day"]}
-                           onChange={(date) => rhfField.onChange(date)}
-                           value={rhfField.value}
-                           maxDate={
-                             new Date(
-                               new Date().setFullYear(new Date().getFullYear() - 18)
-                             )
-                           }
-                           slotProps={{
-                             textField: {
-                               fullWidth: true,
-                               placeholder: field.placeholder || "DD/MM/YYYY",
-                               error: !!fieldState.error,
-                               helperText: fieldState.error?.message,
-                               InputLabelProps: {
-                                 sx: {
-                                   fontSize: "1.05rem",
-                                   fontWeight: 500,
-                                   color: "text.secondary",
-                                   "&.Mui-focused": { color: "#16A34A" },
-                                 },
-                               },
-                               sx: {
-                                 "& .MuiOutlinedInput-root": {
-                                   borderRadius: "12px",
-                                   transition: "all 0.3s ease",
-                                   backgroundColor: "#fff",
-                                   "&:hover": { transform: "scale(1.01)" },
-                                   "&.Mui-focused fieldset": {
-                                     borderColor: "#16A34A",
-                                     boxShadow: "0 0 0 2px rgba(34,197,94,0.2)",
-                                     backgroundColor: "#F0FDF4",
-                                   },
-                                 },
-                                 "& input": {
-                                   padding: "16px 20px",
-                                   fontSize: { xs: "14px", sm: "16px", md: "16px" },
-                                   fontWeight: 500,
-                                 },
-                               },
-                             },
-                           }}
-                         />
-                       </LocalizationProvider>
-                     )}
-                   />
-                 </div>
-               );
+        return (
+          <div key={name} className="flex flex-col mb-8">
+            <label className="mb-3 my-6 text-[28px] sm:text-[25px] md:text-4xl text-center text-gray-800 leading-snug">
+              {field.label}
+            </label>
+
+            <Controller
+              name={name}
+              control={control}
+              defaultValue={
+                defaultValues.dob ? new Date(defaultValues.dob) : null
+              }
+              rules={{
+                required: "Choose your Date of Birth",
+                validate: (value) => {
+                  if (!value) return "Choose your Date of Birth";
+
+                  const dateValue =
+                    value instanceof Date ? value : new Date(value);
+                  if (isNaN(dateValue.getTime())) return "Invalid date";
+
+                  const yearStr = dateValue.getFullYear().toString();
+                  // Must be 4 digits, max 3 zeros allowed, cannot start with zero
+                  if (!/^[1-9][0-9]{0,3}$/.test(yearStr))
+                    return "Please select a valid 4-digit year";
+
+                  const age = differenceInYears(new Date(), dateValue);
+                  if (age < 18) return "You must be at least 18 years old";
+
+                  return true;
+                },
+              }}
+              render={({ field: rhfField, fieldState }) => (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    {...rhfField}
+                    disableFuture
+                    openTo="year"
+                    views={["year", "month", "day"]}
+                    onChange={(date) => rhfField.onChange(date)}
+                    value={rhfField.value}
+                    maxDate={
+                      new Date(
+                        new Date().setFullYear(new Date().getFullYear() - 18)
+                      )
+                    }
+                    slotProps={{
+                      textField: {
+                        fullWidth: true,
+                        placeholder: field.placeholder || "DD/MM/YYYY",
+                        error: !!fieldState.error,
+                        helperText: fieldState.error?.message,
+                        InputLabelProps: {
+                          sx: {
+                            fontSize: "1.05rem",
+                            fontWeight: 500,
+                            color: "text.secondary",
+                            "&.Mui-focused": { color: "#16A34A" },
+                          },
+                        },
+                        sx: {
+                          "& .MuiOutlinedInput-root": {
+                            borderRadius: "12px",
+                            transition: "all 0.3s ease",
+                            backgroundColor: "#fff",
+                            "&:hover": { transform: "scale(1.01)" },
+                            "&.Mui-focused fieldset": {
+                              borderColor: "#16A34A",
+                              boxShadow: "0 0 0 2px rgba(34,197,94,0.2)",
+                              backgroundColor: "#F0FDF4",
+                            },
+                          },
+                          "& input": {
+                            padding: "16px 20px",
+                            fontSize: { xs: "14px", sm: "16px", md: "16px" },
+                            fontWeight: 500,
+                          },
+                        },
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+              )}
+            />
+          </div>
+        );
 
       case "select":
         return (
-          <div key={name} className="flex flex-col mb-8 gap-5 items-center justify-center">
-           <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl   font-semibold text-black leading-snug w-[250px]  md:w-full text-center">
+          <div
+            key={name}
+            className="flex flex-col mb-8 gap-5 items-center justify-center"
+          >
+            <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl   font-semibold text-black leading-snug w-[250px]  md:w-full text-center">
               {field.label}
             </label>
 
@@ -512,8 +495,7 @@ savePartialData(allValues);
               )}
             />
 
-
-             {(errors as any)[name] && (
+            {(errors as any)[name] && (
               <span className="text-red-500  font-semibold text-sm md:text-base mt-1 text-center">
                 {(errors as any)[name]?.message}
               </span>
@@ -640,7 +622,6 @@ savePartialData(allValues);
               <button
                 type="submit"
                 disabled={submitLoader}
-
                 className="
                  w-full 
                 px-4 py-3 sm:px-5 sm:py-4 
@@ -652,14 +633,14 @@ savePartialData(allValues);
                 transition ease-in-out duration-200 
                 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {
-                  submitLoader?(
-                    <div className="flex items-center justify-center gap-2"><Loader2 className="animate-spin h-5 w-5"/>Submitting..</div>
-                  ):(
-"Register"
-                  )
-                }
-               
+                {submitLoader ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <Loader2 className="animate-spin h-5 w-5" />
+                    Submitting..
+                  </div>
+                ) : (
+                  "Register"
+                )}
               </button>
             )}
           </form>

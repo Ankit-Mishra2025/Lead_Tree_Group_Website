@@ -212,14 +212,9 @@ export default function HomeLoan() {
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
 
   const inputClass = `
-  w-full                    /* full width on all screens */
-  max-w-[490px]            /* limit width on mobile */
-  sm:max-w-[420px]         /* small screens */
-  md:max-w-[500px]         /* medium screens */
-  lg:max-w-[600px]         /* large screens */
-  xl:max-w-[700px]         /* extra large screens */
+   w-full                    /* full width on all screens */
 
-  mt-5   px-5 py-3 md:px-3 md:py-3 
+  mt-8   px-3 py-3 md:px-3 md:py-3 
   text-[17px] sm:text-[15px] md:text-[18px]
 
   border rounded-lg
@@ -238,7 +233,7 @@ export default function HomeLoan() {
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6">
-            <label className="text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-full">
+           <label className="mb-3 text-[30px] sm:text-[35px] md:text-4xl xl:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
               {field.label}
             </label>
 

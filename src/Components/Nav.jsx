@@ -138,6 +138,7 @@
 
 import React from 'react'
 import Logo from "../assets/LeadTreeGroup.png";
+
 const Nav = () => {
   return (
     <div className='w-full flex items-center justify-between p-2  '>

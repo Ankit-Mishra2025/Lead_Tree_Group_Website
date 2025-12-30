@@ -217,7 +217,7 @@ export default function PersonalLoanForm() {
 
 
   mt-8   px-3 py-3 md:px-3 md:py-3 
-  text-[17px] sm:text-[15px] md:text-[18px]
+  text-[16px] sm:text-[15px] md:text-[18px]
 
   border rounded-lg
   focus:outline-none 
@@ -235,7 +235,7 @@ export default function PersonalLoanForm() {
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6">
-            <label className="mb-3 text-[28px] sm:text-[28px] md:text-4xl lg:text-5xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
+            <label className="mt-4 text-[30px] sm:text-[35px] md:text-4xl xl:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
               {field.label}
             </label>
             <Controller
@@ -500,7 +500,7 @@ export default function PersonalLoanForm() {
                           mt: { xs: 2, sm: 1 },
                           backgroundColor: "#FFFFFF",
                           boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
-                          display: "flex",
+                          display: "flex gap-5",
                           flexDirection: "column",
                           gap: 1,
                           p: 1,
@@ -529,16 +529,20 @@ export default function PersonalLoanForm() {
                     </MenuItem>
 
                     {/* Options */}
-                    {field.options?.map((opt: any, idx: number) => (
+                 
+
+{field.options?.map((opt: any, idx: number) => (
+  
                       <MenuItem
                         key={idx}
                         value={opt.value ?? opt}
                         disableRipple
                         sx={{
-                          py: 1.5,
-                          px: 1.5,
-                          borderRadius: 1,
+                          py: 1.4,
+                          px: 1.8,
+                          borderRadius: 2,
                           backgroundColor: "#FFFFFF",
+                      
                           fontSize: { xs: "14px", sm: "14px", md: "16px" },
                           border: "1.5px solid #E5E7EB",
                           transition:
@@ -557,9 +561,15 @@ export default function PersonalLoanForm() {
                           },
                         }}
                       >
-                        {opt.label ?? opt}
+                       {opt.label ?? opt} 
                       </MenuItem>
                     ))}
+                    
+                   
+
+
+                   
+                    
                   </Select>
                 )}
               />
@@ -601,7 +611,7 @@ export default function PersonalLoanForm() {
 
   return (
     <>
-      <div className="relative flex flex-col items-center justify-center p-0 md:p-12">
+      <div className="flex flex-col items-center justify-center  md:p-12">
         <Toaster
           position="top-right"
           reverseOrder={false}
@@ -636,9 +646,9 @@ export default function PersonalLoanForm() {
         />
 
         {/* Form Container */}
-        <div className="w-full  max-w-xl p-6 md:p-8 rounded-lg  z-10 items-center justify-center ">
+        <div className="w-full max-w-xl p-6 md:p-8 rounded-lg z-10 items-center justify-center ">
           {/* Progress Bar */}
-          <div className="w-full h-1 mb-6 bg-gray-300 rounded-full">
+          <div className="w-full h-1 mb-5 bg-gray-300 rounded-full">
             <div
               className="h-1 bg-green-600 rounded-full transition-all duration-500"
               style={{ width: `${progress}%` }}
@@ -646,8 +656,8 @@ export default function PersonalLoanForm() {
           </div>
 
           {/* Step Form */}
-          <form onSubmit={handleSubmit(onSubmit, onError)} className="mt-5">
-            <div className="flex justify-center items-center mb-5 ">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col items-center justify-center W-2xl ">
+            <div className="flex justify-center items-center">
               <h1 className="text-[16px] text-green-800">PERSONAL LOAN</h1>
             </div>
 
@@ -663,29 +673,30 @@ export default function PersonalLoanForm() {
 
             {/* Navigation Buttons (Previous / Continue) */}
             {currentStep < steps.length && (
-              <div className="flex flex-col sm:flex-row justify-between mt-15 gap-3">
-                {/* Previous Button */}
-                {currentStep > 0 && (
-                  <button
-                    type="button"
-                    onClick={prevStep}
-                    className="w-full sm:w-auto px-5 py-3 sm:px-6 sm:py-3 text-[17px] bg-gray-200 hover:bg-gray-300 rounded-lg transition ease-in-out duration-200 cursor-pointer"
-                  >
-                    ← Previous
-                  </button>
-                )}
+              <div className="flex w-full mt-5 flex-col sm:flex-row sm:justify-between gap-4">
+  {/* Previous Button */}
+  {currentStep > 0 && (
+    <button
+      type="button"
+      onClick={prevStep}
+      className="w-full sm:w-auto px-5 py-3 text-[17px] bg-gray-200 hover:bg-gray-300 rounded-lg transition ease-in-out duration-200 cursor-pointer"
+    >
+      ← Previous
+    </button>
+  )}
 
-                {/* Next Button */}
-                {currentStep < steps.length - 1 && (
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    className="w-full sm:w-auto mt-5 sm:mt-0 px-8 py-3 sm:px-8 sm:py-3 text-[17px] bg-green-600 hover:bg-green-700 text-white rounded-lg transition ease-in-out duration-200 cursor-pointer"
-                  >
-                    Next →
-                  </button>
-                )}
-              </div>
+  {/* Next Button */}
+  {currentStep < steps.length - 1 && (
+    <button
+      type="button"
+      onClick={nextStep}
+      className="w-full sm:w-auto px-8 py-3 text-[17px] bg-green-600 hover:bg-green-700 text-white rounded-lg transition ease-in-out duration-200 cursor-pointer"
+    >
+      Next →
+    </button>
+  )}
+</div>
+
             )}
 
             {/* Submit / Register Button */}
@@ -719,6 +730,7 @@ export default function PersonalLoanForm() {
           </form>
         </div>
       </div>
+      
 
       <div className="flex w-full flex-col justify-center items-center  sm:mt-5">
         {/* Secure Info */}

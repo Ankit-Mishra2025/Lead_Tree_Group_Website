@@ -207,10 +207,17 @@ savePartialData(allValues)
 
   // All Inputs Styling
  const inputClass = `
-   w-full mt-8 px-3 py-3 text-[15px] sm:text-[14px] md:text-[16px]
-    border rounded-lg focus:outline-none focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200
-    transition-all duration-300 ease-in-out
-    hover:translate-y-1 hover:scale-103
+   w-full                    /* full width on all screens */
+
+  mt-8   px-3 py-3 md:px-3 md:py-3 
+  text-[17px] sm:text-[15px] md:text-[18px]
+
+  border rounded-lg
+  focus:outline-none 
+  focus:ring-1 focus:ring-green-400 focus:bg-green-50 focus:border-green-200
+
+  transition-all duration-300 ease-in-out
+  hover:translate-y-1 hover:scale-103
   `;
 
   const renderField = (field: any) => {
@@ -221,7 +228,7 @@ savePartialData(allValues)
       case "email":
         return (
           <div key={name} className="flex flex-col mb-6 items-center">
-           <label className="mb-3 text-[28px] sm:text-[25px] md:text-4xl  text-center font-semibold text-black leading-snug w-[250px]  md:w-full">
+           <label className="mb-3 text-[30px] sm:text-[35px] md:text-4xl xl:text-4xl  text-center font-semibold text-black leading-snug w-full flex flex-col items-center">
               {field.label}
             </label>
             <Controller
