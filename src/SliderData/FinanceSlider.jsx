@@ -42,7 +42,7 @@ const FinanceSlider = () => {
   loop={financeImageData.length > 5}
   speed={2000}
   autoplay={{
-    delay: 0,
+    delay: 1,
     disableOnInteraction: false,
   }}
   freeMode={true}

@@ -27,7 +27,7 @@ const DebtReliefBanner = () => {
             </p>
             <div className="flex items-center gap-5">
               <button
-                className="mt-4 ml-2 w-50 px-8 py-3 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300"
+                className="mt-4  w-50 px-8 py-3 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300"
                 onClick={handleCompareRates}
               >
                 Get Debt Relief

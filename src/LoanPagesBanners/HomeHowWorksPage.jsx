@@ -26,7 +26,7 @@ const HomeHowWorksPage = () => {
     
       <div className="relative flex w-full items-center justify-between top-10 px-40">
         {/* ICON 1 */}
-        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#bef6d9] z-10">
+        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#cdfbe2] z-10">
           <HandHeart className="h-7 w-7 text-[#46ab75]" />
         </div>
 
@@ -39,7 +39,7 @@ const HomeHowWorksPage = () => {
         </div>
 
         {/* ICON 2 */}
-        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#bef6d9] z-10">
+        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#cdfbe2] z-10">
           <FileText className="h-7 w-7 text-[#46ab75]" />
         </div>
 
@@ -52,7 +52,7 @@ const HomeHowWorksPage = () => {
         </div>
 
         {/* ICON 3 */}
-        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#bef6d9] z-10">
+        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#cdfbe2] z-10">
           <Handshake className="h-7 w-7 text-[#46ab75]" />
         </div>
 
@@ -65,7 +65,7 @@ const HomeHowWorksPage = () => {
         </div>
 
         {/* ICON 4 */}
-        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#bef6d9] z-10">
+        <div className="relative flex items-center justify-center h-10 w-10 rounded-full bg-[#cdfbe2] z-10">
           <ArrowLeftRight className="h-7 w-7 text-[#46ab75]" />
         </div>
       </div>

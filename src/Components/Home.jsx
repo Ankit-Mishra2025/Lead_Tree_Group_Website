@@ -189,7 +189,7 @@ const HomeCarousel = () => {
 
 <div className=" w-full mt-15 flex items-center  justify-center  ">
 
-<div className="bg-[#1882340F] flex items-cente justify-center ml-5  py-3 w-3xl border-1 border-[#188234] rounded-full gap-7 ">
+<div className="bg-[#1882340F] flex items-cente justify-center ml-5  py-4 w-4xl border-1 border-[#188234] rounded-full gap-10 ">
 <div className="flex flex-col items-center  justify-center">
   <h2 className="font-semibold text-[#188234]">350+</h2>
 <p className="text-[14px] font-semibold">Trusted Lenders</p>
@@ -205,7 +205,7 @@ const HomeCarousel = () => {
 </div>
 
 <div className="flex items-center justify-center">
-  <div className="w-[2px] h-13 bg-green-600 ml-3"></div>
+  <div className="w-0.5 h-13 bg-green-600 ml-3"></div>
 </div>
 
 
@@ -215,7 +215,7 @@ const HomeCarousel = () => {
 </div>
 
 <div className="flex items-center justify-center">
-  <div className="w-[2px] h-13 bg-green-600 ml-3"></div>
+  <div className="w-0.5 h-13 bg-green-600 ml-3"></div>
 </div>
 
 <div className="flex flex-col items-center px-2 justify-center">

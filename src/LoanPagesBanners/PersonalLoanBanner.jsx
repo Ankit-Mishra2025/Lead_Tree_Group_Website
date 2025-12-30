@@ -28,7 +28,7 @@ const PersonalLoanBanner = () => {
             </p>
             <button
               onClick={handleCompareRates}
-              className="mt-4 ml-2 px-8 py-3 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300"
+              className="mt-4  px-8 py-3 bg-green-600 text-white text-[17px] rounded-md font-bold cursor-pointer hover:bg-green-700 hover:translate-x-1 transition-all duration-300"
             >
               Compare Rates
             </button>
