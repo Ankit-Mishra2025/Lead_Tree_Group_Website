@@ -7,8 +7,7 @@ import Home from "./Components/Home";
 // import PersonalLoanBanner from "./LoanPagesBanners/PersonalLoanBanner";
 import Footer from "./Components/Footer";
 
-// import AutoSellValuation from "./LoanForms/forms/components/AutoSellForm/AutoSellValuation";
-// import BikeValuationLoan from "./LoanForms/forms/components/BikeSellLoanForm/BikeValuationLoan";
+
 import HomePageWorkBanner from "./LoanPagesBanners/HomePageWorkBanner";
 import HomePageChhoseReason from "./LoanPagesBanners/HomeHowWorksPage";
 import HomePageTrust from "./LoanPagesBanners/HomePageTrust";
